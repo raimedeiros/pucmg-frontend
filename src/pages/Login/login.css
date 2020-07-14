@@ -1,0 +1,79 @@
+body{
+  background-color: #3D0659;
+  margin: 0;
+  padding:0;
+  width: 100%;
+  height: 100%;
+}
+#page-login{
+  background-image: url('../../assets/bkg-login.svg');
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#page-login .logo{
+  width: 388px;
+  height: 126px;;
+}
+
+#page-login form{
+  margin-top:60px;
+}
+
+#page-login form label {
+  font-weight: 700;
+  color: #FFF;
+}
+
+#page-login form .field {
+  margin-bottom: 30px;
+}
+
+#page-login form .field .input-box{
+  display: flex;
+}
+
+#page-login form .field .input-box .dcr-input{
+  width: 50px;
+  height: 50px;
+  background-color: #640893;
+  border: 1px solid #8705C9;
+  border-radius: 0px 10px 10px 0px;
+  color: #FFF;
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+#page-login form .field .input-box .dcr-input svg{
+  padding-top: 15px;
+}
+
+#page-login form .field input[type=text],
+#page-login form .field input[type=password] {
+  margin-top: 10px;
+  flex: 1;
+  background: #F0F0F5;
+  border-radius: 10px 0 0 10px;
+  border: 0;
+  padding: 16px 24px;
+  font-size: 16px;
+  color: #6C6C80;
+}
+
+#page-login .novo-usuario{
+  margin-top:50px;
+  font-weight: 700;
+}
+#page-login .novo-usuario a{
+  text-decoration: none;
+  color:#FFF;
+}
+#page-login .novo-usuario a svg, #page-login button svg{
+  color:#FFF;
+  vertical-align: middle;
+  margin-right: 5px;
+}
