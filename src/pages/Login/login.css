@@ -9,26 +9,28 @@ body{
   background-image: url('../../assets/bkg-login.svg');
   background-size: cover;
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+}
+#page-login .content{
+  padding-top:100px;
 }
 #page-login .logo{
-  width: 388px;
-  height: 126px;;
+  text-align: center;
 }
-
+#page-login .logo img{
+  width: 100%;
+  max-width: 388px;
+  height: auto;
+}
 #page-login form{
   margin-top:60px;
 }
-
 #page-login form label {
   font-weight: 700;
   color: #FFF;
 }
-
 #page-login form .field {
-  margin-bottom: 30px;
+  margin: 0 auto 30px auto;
+  max-width: 400px;
 }
 
 #page-login form .field .input-box{
@@ -65,8 +67,9 @@ body{
 }
 
 #page-login .novo-usuario{
-  margin-top:50px;
+  margin:30px;
   font-weight: 700;
+  text-align: center;
 }
 #page-login .novo-usuario a{
   text-decoration: none;
@@ -76,4 +79,7 @@ body{
   color:#FFF;
   vertical-align: middle;
   margin-right: 5px;
+}
+#page-login form .submit-button{
+  text-align: center;
 }
