@@ -3,13 +3,16 @@ import {Link} from 'react-router-dom'
 import './login.css'
 import Logo from '../../assets/Logo.svg'
 import {FiLogIn, FiPlusCircle, FiUser, FiKey} from 'react-icons/fi'
+import { Container, Row, Col } from 'react-grid-system';
 
 const Login = () => {
   return(
-    <div id="page-login">
-      <div className="content">
-        <img className="logo" src={Logo} alt="logo"></img>
-        <div className="form-login">
+    <Container fluid id="page-login">
+      <Row className="content">
+         <Col className="logo" xs={12} offset={{md: 4}} md={4}>
+          <img src={Logo} alt="logo"></img>
+        </Col>
+        <Col xs={12} md={4} offset={{md:4}}>
           <form>
             <div className="field">
               <label htmlFor="usuario">Usuário</label>
@@ -25,16 +28,16 @@ const Login = () => {
                 <span className="dcr-input"><FiKey/></span>
               </div>
             </div>
-            <div className="align-right">
+            <div className="submit-button">
               <button type="submit" className="button-roxo"><FiLogIn/>Entrar</button>
             </div>  
           </form>
-          <div className="novo-usuario align-right">
+          <div className="novo-usuario">
             <Link to="#"><FiPlusCircle/>Criar novo usuário</Link>
           </div>
-        </div>
-      </div>
-    </div>
+        </Col>  
+      </Row>
+    </Container>
   )
 }
 
