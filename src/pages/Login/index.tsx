@@ -33,7 +33,7 @@ const Login = () => {
             </div>  
           </form>
           <div className="novo-usuario">
-            <Link to="#"><FiPlusCircle/>Criar novo usuário</Link>
+            <Link to="/Estoques"><FiPlusCircle/>Criar novo usuário</Link>
           </div>
         </Col>  
       </Row>
