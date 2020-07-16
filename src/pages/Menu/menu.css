@@ -1,0 +1,18 @@
+#page-menu, #page-menu a{
+  color:#FFF;
+  font-weight: 500;
+  text-decoration: none;
+}
+#page-menu a:hover{
+  text-decoration: underline;
+}
+#page-menu .menu-logo{
+  margin:27px 0;
+}
+#page-menu .lista-menu{
+  list-style: none;
+  padding: 10px 0 0 0;
+}
+#page-menu .lista-menu li{
+  padding:5px 0;
+}
