@@ -1,0 +1,70 @@
+#page-estoques{
+ margin-top: 20px; 
+}
+#page-estoques .content-page{
+  background-color: #F8F8F8;
+  border-radius: 50px 0 0 0;
+}
+#page-estoques .main-row{
+  height: 100vh;
+}
+#page-estoques .main-padding{
+  padding-top: 80px;
+  padding-left: 80px;
+}
+.card-estoque{
+  background-color: #FFF;
+  border-radius: 20px;
+  border:1px solid #EDEDED;
+  padding:20px;
+  margin-bottom:20px;
+}
+.card-estoque .head-estoque{
+  display: flex;
+}
+.card-estoque .head-estoque .icon-estoque span{
+  background-color: #D6ECFF;
+  border: 1px solid #72BEFF;
+  width: 40px;
+  height: 30px;
+  border-radius: 50px;
+  display: block;
+  padding-top: 9px;
+  text-align: center;
+  margin-right: 16px;
+}
+.card-estoque .head-estoque .icon-estoque svg{
+  width: 18px;
+  height: 20px;
+  color:#72BEFF;
+}
+.card-estoque .titulo-estoque{
+  font-weight: 700;
+}
+.card-estoque .tipo-estoque{
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.card-estoque .body-estoque .quantidade-itens{
+  font-size: 40px;
+  font-weight: 700;
+  color:#5A5A5A;
+  text-align: center;
+  padding:27px 0;
+}
+.card-estoque .body-estoque .quantidade-itens span{
+  font-size: 40px;
+  font-weight: 400;
+  font-size: 14px;
+}
+.card-estoque .footer-estoque p{
+  margin:3px 0;
+  font-weight: 500;
+}
+.card-estoque .footer-estoque .alerta-amarelo{
+  color:#E5A515;
+}
+.card-estoque .footer-estoque .alerta-vermelho{
+  color:#EA1616;
+}
