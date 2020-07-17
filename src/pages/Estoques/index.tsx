@@ -8,7 +8,8 @@ import api from '../../services/api'
 interface Estoque{
   id: number;
   name: string;
-  type:string
+  type:string;
+  quantidade_produtos:number
 }
 const Estoques = ()=> {
 
@@ -46,7 +47,7 @@ const Estoques = ()=> {
                     </div>
                     <div className="body-estoque">
                       <div className="quantidade-itens">
-                        25<span>itens</span>
+                        {estoque.quantidade_produtos}<span>itens</span>
                       </div>
                     </div>
                     <div className="footer-estoque">
