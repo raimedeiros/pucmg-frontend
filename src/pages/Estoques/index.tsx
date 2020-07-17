@@ -4,22 +4,33 @@ import './estoques.css'
 import {FiBox} from 'react-icons/fi'
 import Menu from '../Menu'
 import api from '../../services/api'
+import Produtos from '../Produtos'
 
 interface Estoque{
-  id: number;
-  name: string;
+  id:number;
+  name:string;
   type:string;
   quantidade_produtos:number
+}
+interface Produto{
+  id:number;
+  name:string;
 }
 const Estoques = ()=> {
 
   const [estoques,setEstoques] = useState<Estoque[]>([])
+  const [estoqueSelecionado,setEstoqueSelecionado] = useState(0)
 
   useEffect(()=>{
     api.get('estoques').then(response=>{
       setEstoques(response.data)
     })
-  },[])
+  },[estoques])
+
+  function handleEstoqueSelecionado(estoque:number){
+    setEstoqueSelecionado(estoque)
+    console.log(estoqueSelecionado);
+  }
 
   return(
     <Container id="page-estoques">
@@ -34,8 +45,8 @@ const Estoques = ()=> {
             </h1>
             <Row>
               {estoques.map(estoque=>(
-                <Col md={4}>
-                  <div className="card-estoque">
+                <Col md={4} key={estoque.id}>
+                  <div className="card-estoque" onClick={()=>handleEstoqueSelecionado(estoque.id)}>
                     <div className="head-estoque">
                       <div className="icon-estoque">
                         <span><FiBox></FiBox></span>
@@ -47,7 +58,7 @@ const Estoques = ()=> {
                     </div>
                     <div className="body-estoque">
                       <div className="quantidade-itens">
-                        {estoque.quantidade_produtos}<span>itens</span>
+                        {estoque.quantidade_produtos}<span>{estoque.quantidade_produtos>1?'itens':'item'}</span>
                       </div>
                     </div>
                     <div className="footer-estoque">
@@ -57,6 +68,16 @@ const Estoques = ()=> {
                   </div>
                 </Col>
               ))}
+            </Row>
+            <Row>
+              <Col>
+                {
+                  estoqueSelecionado>0 ? (
+                    <Produtos estoqueSelecionado={estoqueSelecionado}></Produtos>
+                  )
+                  : ('')
+                }
+              </Col>
             </Row>
           </div>
         </Col>
