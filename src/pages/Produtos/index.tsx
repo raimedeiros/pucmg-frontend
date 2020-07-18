@@ -25,12 +25,12 @@ export default function Produtos({estoqueSelecionado}:ProdutoProps){
   return(
     <div id="page-produtos">
       <Row>
-        <Col className="titulo-produtos">
-        <h1 className="titulo-pagina">
-          <FiShoppingBag></FiShoppingBag>Produtos
-        </h1>
+        <Col className="titulo-pagina">
+          <h1>
+            <FiShoppingBag></FiShoppingBag>Produtos
+          </h1>
         </Col>
-        <Col className="adicionar-produtos">
+        <Col className="adicionar-item">
           <button className="button-roxo"><FiPlusCircle></FiPlusCircle>Adicionar produto</button>
         </Col>
       </Row>

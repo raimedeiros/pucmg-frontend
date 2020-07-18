@@ -12,17 +12,19 @@ body{
   font-size: 16px;
   font-weight: 700;
 }
-
+.adicionar-item{
+  text-align: right;
+}
 .align-right{
   text-align: right;
 }
-h1.titulo-pagina{
+.titulo-pagina h1{
   font-size: 26px;
   font-weight: 700;
   color: #3D0659;
 }
 
-h1.titulo-pagina svg{
+.titulo-pagina svg,.adicionar-item svg{
   vertical-align: top;
   margin-right: 5px;
 }

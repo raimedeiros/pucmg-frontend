@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {Container, Col, Row} from 'react-grid-system'
 import './estoques.css'
-import {FiBox} from 'react-icons/fi'
+import {FiBox,FiPlusCircle} from 'react-icons/fi'
 import Menu from '../Menu'
 import api from '../../services/api'
 import Produtos from '../Produtos'
@@ -38,11 +38,17 @@ const Estoques = ()=> {
         <Col md={2}>
           <Menu></Menu>
         </Col>
+
         <Col className="content-page" md={10}>
           <div className="main-padding">
-            <h1 className="titulo-pagina">
-              <FiBox></FiBox>Estoques
-            </h1>
+            <Row>
+              <Col className="titulo-pagina">
+                <h1><FiBox></FiBox>Estoques</h1>
+              </Col>
+              <Col className="adicionar-item">
+                <button className="button-roxo"><FiPlusCircle></FiPlusCircle>Adicionar estoque</button>
+              </Col>
+            </Row>
             <Row>
               {estoques.map(estoque=>(
                 <Col md={4} key={estoque.id}>
