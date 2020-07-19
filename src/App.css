@@ -15,6 +15,9 @@ body{
 .adicionar-item{
   text-align: right;
 }
+.adicionar-item button{
+  cursor: pointer;
+}
 .align-right{
   text-align: right;
 }
@@ -27,4 +30,43 @@ body{
 .titulo-pagina svg,.adicionar-item svg{
   vertical-align: top;
   margin-right: 5px;
+}
+
+.content-page{
+  background-color: #F8F8F8;
+  border-radius: 50px 10px 0 0;
+}
+.main-row{
+  height: 100vh;
+}
+.main-padding{
+  padding-top: 80px;
+  padding-left: 80px;
+}
+
+.form-padrao label{
+  font-weight:700;
+}
+.form-padrao .field input[type=text]{
+  margin-top: 5px;
+  background: #F0F0F5;
+  border:1px solid #dcdcef;
+  border-radius: 10px;
+  padding: 16px 24px;
+  font-size: 16px;
+  color: #6C6C80;
+  margin-bottom:30px;
+  min-width:300px;
+}
+.form-padrao .field select{
+  display:block;
+  margin-top: 5px;
+  background: #F0F0F5;
+  border:1px solid #dcdcef;
+  border-radius: 10px;
+  padding: 16px 24px;
+  font-size: 16px;
+  color: #6C6C80;
+  margin-bottom:30px;
+  min-width:350px;
 }

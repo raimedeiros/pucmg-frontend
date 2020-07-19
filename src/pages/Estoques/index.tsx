@@ -5,6 +5,7 @@ import {FiBox,FiPlusCircle} from 'react-icons/fi'
 import Menu from '../Menu'
 import api from '../../services/api'
 import Produtos from '../Produtos'
+import { Link } from 'react-router-dom'
 
 interface Estoque{
   id:number;
@@ -46,7 +47,9 @@ const Estoques = ()=> {
                 <h1><FiBox></FiBox>Estoques</h1>
               </Col>
               <Col className="adicionar-item">
-                <button className="button-roxo"><FiPlusCircle></FiPlusCircle>Adicionar estoque</button>
+                <Link to='/estoques/create'>
+                  <button className="button-roxo"><FiPlusCircle></FiPlusCircle>Adicionar estoque</button>
+                </Link> 
               </Col>
             </Row>
             <Row>
