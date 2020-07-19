@@ -47,7 +47,7 @@ const Estoques = ()=> {
                 <h1><FiBox></FiBox>Estoques</h1>
               </Col>
               <Col className="adicionar-item">
-                <Link to='/estoques/create'>
+                <Link to='/estoques/create?'>
                   <button className="button-roxo"><FiPlusCircle></FiPlusCircle>Adicionar estoque</button>
                 </Link> 
               </Col>

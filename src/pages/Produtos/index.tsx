@@ -3,6 +3,7 @@ import {Col, Row} from 'react-grid-system'
 import {FiShoppingBag,FiPlusCircle,FiEdit,FiTrash2} from 'react-icons/fi'
 import './produtos.css'
 import api from '../../services/api'
+import { Link } from 'react-router-dom'
 
 type ProdutoProps = {
   estoqueSelecionado:number;
@@ -31,7 +32,9 @@ export default function Produtos({estoqueSelecionado}:ProdutoProps){
           </h1>
         </Col>
         <Col className="adicionar-item">
-          <button className="button-roxo"><FiPlusCircle></FiPlusCircle>Adicionar produto</button>
+          <Link to="/produtos/create">
+            <button className="button-roxo"><FiPlusCircle></FiPlusCircle>Adicionar produto</button>
+          </Link>
         </Col>
       </Row>
       <Row>
@@ -48,7 +51,7 @@ export default function Produtos({estoqueSelecionado}:ProdutoProps){
             <tbody>
               {
                 produtos.map(produto=>(
-                  <tr className="linha-produto">
+                  <tr className="linha-produto" key={produto.id}>
                       <td className="cell-name">{produto.name}</td>
                       <td className="cell-expires">{produto.expires}</td>
                       <td className="cell-amount">{produto.quantity}</td>

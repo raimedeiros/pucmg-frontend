@@ -26,7 +26,7 @@ const CreateProduto = () => {
     api.get('/estoques').then(response=>{
       setEstoques(response.data)
     })
-  },[])
+  })
 
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
