@@ -23,8 +23,8 @@
   display: flex;
 }
 .card-estoque .head-estoque .icon-estoque span{
-  background-color: #D6ECFF;
-  border: 1px solid #72BEFF;
+  background-color: #FFECB3;
+  border: 1px solid #FFC107;
   width: 40px;
   height: 30px;
   border-radius: 50px;
@@ -36,7 +36,7 @@
 .card-estoque .head-estoque .icon-estoque svg{
   width: 18px;
   height: 20px;
-  color:#72BEFF;
+  color:#FFC107;
 }
 .card-estoque .titulo-estoque{
   font-weight: 700;

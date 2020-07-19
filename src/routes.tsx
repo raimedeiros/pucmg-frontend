@@ -5,7 +5,6 @@ import Login from './pages/Login'
 import Estoques from './pages/Estoques'
 import CreateEstoque from './pages/Estoques/createEstoque'
 import CreateProduto from './pages/Produtos/createProduto'
-import CreateTipoEstoque from './pages/TipoEstoque'
 
 const Routes = () => {
     return (
@@ -14,7 +13,6 @@ const Routes = () => {
             <Route component={Estoques} path="/estoques" exact/>
             <Route component={CreateEstoque} path="/estoques/create"/>
             <Route component={CreateProduto} path="/produtos/create"/>
-            <Route component={CreateTipoEstoque} path="/tipos-estoques/create"/>
         </BrowserRouter>
     )
 }
