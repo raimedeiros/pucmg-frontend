@@ -13,17 +13,18 @@ interface Estoques{
   name:string;
   type:string;
 }
+interface CreateProductDTO{
+  name:string,
+  expires:string,
+  amount:string,
+  estoque:string,
+}
 const CreateProduto = () => {
 
   const { params } = useRouteMatch<CreateProductsParams>();
   const [estoques,setEstoques] = useState<Estoques[]>([])
   const [selectedEstoque,setSelectedEstoque] = useState('0')
-  const [formData, setFormData] = useState({
-    name: '',
-    expires: '',
-    amount: '',
-    estoque: selectedEstoque,
-  })
+  const [formData, setFormData] = useState<CreateProductDTO>({}as CreateProductDTO)
   const history = useHistory()
 
   useEffect(()=>{
@@ -33,30 +34,32 @@ const CreateProduto = () => {
       setEstoques(response.data)
     })
 
-  },[params.estoque])
+  },[params.estoque, selectedEstoque])
 
-  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target
     setFormData({...formData,[name]:value})
-  }
+  } 
 
   function handleSelectedEstoque(event:ChangeEvent<HTMLSelectElement>){
     const estoque = event.target.value
     setSelectedEstoque(estoque)
   }
-
+ 
   async function handleSubmit(event:FormEvent) {
     event.preventDefault()
-    const { name, expires, amount} = formData
-    const data = {
-      name,
-      expires,
-      amount,
-      estoque:selectedEstoque
+    if(formData){
+      const { name, expires, amount} = formData
+      const data = {
+        name,
+        expires,
+        amount,
+        estoque:selectedEstoque
+      }
+      await api.post('produtos',data)
+      alert("Produto criado")
+      history.push('/estoques')
     }
-    await api.post('produtos',data)
-    alert("Produto criado")
-    history.push('/estoques')
   }
   
   return(
