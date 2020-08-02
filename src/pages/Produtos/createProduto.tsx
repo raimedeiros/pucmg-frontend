@@ -17,7 +17,7 @@ const CreateProduto = () => {
   const [formData, setFormData] = useState({
     name: '',
     expires: '',
-    quantity: '',
+    amount: '',
     estoque: selectedEstoque,
   })
   const history = useHistory()
@@ -41,11 +41,11 @@ const CreateProduto = () => {
 
   async function handleSubmit(event:FormEvent) {
     event.preventDefault()
-    const { name, expires, quantity} = formData
+    const { name, expires, amount} = formData
     const data = {
       name,
       expires,
-      quantity,
+      amount,
       estoque:selectedEstoque
     }
     await api.post('produtos',data)
@@ -83,9 +83,9 @@ const CreateProduto = () => {
                     </div>
                   </div>
                   <div className="field">
-                    <label htmlFor="quantity">Quantidade</label>
+                    <label htmlFor="amount">Quantidade</label>
                     <div className="input-box">
-                      <input type="text" name="quantity" id="quantity" onChange={handleInputChange}/>
+                      <input type="text" name="amount" id="amount" onChange={handleInputChange}/>
                     </div>
                   </div>
                   <div className="field">

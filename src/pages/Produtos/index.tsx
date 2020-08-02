@@ -12,7 +12,7 @@ interface Produtos {
   id:number;
   name:string;
   expires:Date;
-  quantity:number;
+  amount:number;
 }
 export default function Produtos({estoqueSelecionado}:ProdutoProps){
   
@@ -32,7 +32,10 @@ export default function Produtos({estoqueSelecionado}:ProdutoProps){
           </h1>
         </Col>
         <Col className="adicionar-item">
-          <Link to="/produtos/create">
+          <Link to={{
+            pathname: "/produtos/create",
+            state:{estoque: estoqueSelecionado}
+            }}>
             <button className="button-roxo"><FiPlusCircle></FiPlusCircle>Adicionar produto</button>
           </Link>
         </Col>
@@ -54,7 +57,7 @@ export default function Produtos({estoqueSelecionado}:ProdutoProps){
                   <tr className="linha-produto" key={produto.id}>
                       <td className="cell-name">{produto.name}</td>
                       <td className="cell-expires">{produto.expires}</td>
-                      <td className="cell-amount">{produto.quantity}</td>
+                      <td className="cell-amount">{produto.amount}</td>
                       <td className="cell-actions"><FiEdit></FiEdit><FiTrash2></FiTrash2></td>
                   </tr>
                 ))
