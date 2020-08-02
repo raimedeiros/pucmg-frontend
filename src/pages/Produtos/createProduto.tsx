@@ -4,6 +4,11 @@ import {Container, Col, Row} from 'react-grid-system'
 import {FiBox} from 'react-icons/fi'
 import Menu from '../Menu'
 import api from '../../services/api'
+import DatePicker from "react-datepicker";
+import { registerLocale } from  "react-datepicker";
+import ptBR from 'date-fns/locale/pt-BR';
+import "react-datepicker/dist/react-datepicker.css";
+registerLocale('pt-BR', ptBR)
 
 interface CreateProductsParams{
   estoque:string;
@@ -25,6 +30,7 @@ const CreateProduto = () => {
   const [estoques,setEstoques] = useState<Estoques[]>([])
   const [selectedEstoque,setSelectedEstoque] = useState('0')
   const [formData, setFormData] = useState<CreateProductDTO>({}as CreateProductDTO)
+  const [selectedDate,setSelectedDate] = useState<Date>()
   const history = useHistory()
 
   useEffect(()=>{
@@ -45,14 +51,18 @@ const CreateProduto = () => {
     const estoque = event.target.value
     setSelectedEstoque(estoque)
   }
+
+  function handleInputDate(date:Date){
+    setSelectedDate(date)
+  }
  
   async function handleSubmit(event:FormEvent) {
     event.preventDefault()
     if(formData){
-      const { name, expires, amount} = formData
+      const { name, amount} = formData
       const data = {
         name,
-        expires,
+        expires:selectedDate,
         amount,
         estoque:selectedEstoque
       }
@@ -79,7 +89,7 @@ const CreateProduto = () => {
             <Row>
               <Col>
                 <form className="form-padrao" onSubmit={handleSubmit}> 
-                  <div className="field">
+                <div className="field">
                     <label htmlFor="name">Nome</label>
                     <div className="input-box">
                       <input type="text" name="name" id="name" onChange={handleInputChange}/>
@@ -88,7 +98,7 @@ const CreateProduto = () => {
                   <div className="field">
                     <label htmlFor="expires">Validade</label>
                     <div className="input-box">
-                      <input type="text" name="expires" id="expires" onChange={handleInputChange}/>
+                      <DatePicker dateFormat="dd/MM/yyyy" locale="pt-BR" name="expires" id="expires"selected={selectedDate} onChange={handleInputDate} />   
                     </div>
                   </div>
                   <div className="field">

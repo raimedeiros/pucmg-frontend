@@ -13,11 +13,17 @@
   padding-left: 80px;
 }
 .card-estoque{
+  cursor:pointer;
   background-color: #FFF;
   border-radius: 20px;
   border:1px solid #EDEDED;
   padding:20px;
   margin-bottom:20px;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.card-estoque:hover{
+  border-color:#640893;
+  background-color:#EDEDED;
 }
 .card-estoque .head-estoque{
   display: flex;
