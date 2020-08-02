@@ -8,20 +8,29 @@ import { Link } from 'react-router-dom'
 type ProdutoProps = {
   estoqueSelecionado:number;
 }
-interface Produtos {
+interface Produto {
   id:number;
   name:string;
   expires:Date;
+  formattedExpires:string;
   amount:number;
 }
 export default function Produtos({estoqueSelecionado}:ProdutoProps){
   
-  const [produtos, setProdutos] = useState<Produtos[]>([])
+  const [produtos, setProdutos] = useState<Produto[]>([])
   
   useEffect(()=>{
-    api.get(`produtos?estoque=${estoqueSelecionado}`).then(response=>{
-      setProdutos(response.data)
-    })
+    async function loadProducts(){
+      const response = await api.get(`produtos?estoque=${estoqueSelecionado}`)
+      const formattedProducts = response.data.map((product:Produto)=>({
+        ...product,
+        formattedExpires: new Date(product.expires).toLocaleDateString(
+          'pt-br',
+        ),
+      }))
+      setProdutos(formattedProducts)
+    }
+    loadProducts()
   },[estoqueSelecionado])
   return(
     <div id="page-produtos">
@@ -53,7 +62,7 @@ export default function Produtos({estoqueSelecionado}:ProdutoProps){
                 produtos.map(produto=>(
                   <tr className="linha-produto" key={produto.id}>
                       <td className="cell-name">{produto.name}</td>
-                      <td className="cell-expires">{produto.expires}</td>
+                      <td className="cell-expires">{produto.formattedExpires}</td>
                       <td className="cell-amount">{produto.amount}</td>
                       <td className="cell-actions"><FiEdit></FiEdit><FiTrash2></FiTrash2></td>
                   </tr>
