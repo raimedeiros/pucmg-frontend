@@ -26,7 +26,7 @@ const Estoques = ()=> {
     api.get('estoques').then(response=>{
       setEstoques(response.data)
     })
-  },[estoques])
+  },[])
 
   function handleEstoqueSelecionado(estoque:number){
     setEstoqueSelecionado(estoque)
@@ -47,7 +47,7 @@ const Estoques = ()=> {
                 <h1><FiBox></FiBox>Estoques</h1>
               </Col>
               <Col className="adicionar-item">
-                <Link to='/estoques/create?'>
+                <Link to='/estoques/create'>
                   <button className="button-roxo"><FiPlusCircle></FiPlusCircle>Adicionar estoque</button>
                 </Link> 
               </Col>

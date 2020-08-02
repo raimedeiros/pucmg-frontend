@@ -32,10 +32,7 @@ export default function Produtos({estoqueSelecionado}:ProdutoProps){
           </h1>
         </Col>
         <Col className="adicionar-item">
-          <Link to={{
-            pathname: "/produtos/create",
-            state:{estoque: estoqueSelecionado}
-            }}>
+          <Link to={`produtos/create/${estoqueSelecionado}`}>
             <button className="button-roxo"><FiPlusCircle></FiPlusCircle>Adicionar produto</button>
           </Link>
         </Col>

@@ -1,10 +1,13 @@
 import React, {useState, FormEvent, ChangeEvent, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory,useRouteMatch } from 'react-router-dom'
 import {Container, Col, Row} from 'react-grid-system'
 import {FiBox} from 'react-icons/fi'
 import Menu from '../Menu'
 import api from '../../services/api'
 
+interface CreateProductsParams{
+  estoque:string;
+}
 interface Estoques{
   id:number;
   name:string;
@@ -12,6 +15,7 @@ interface Estoques{
 }
 const CreateProduto = () => {
 
+  const { params } = useRouteMatch<CreateProductsParams>();
   const [estoques,setEstoques] = useState<Estoques[]>([])
   const [selectedEstoque,setSelectedEstoque] = useState('0')
   const [formData, setFormData] = useState({
@@ -23,11 +27,13 @@ const CreateProduto = () => {
   const history = useHistory()
 
   useEffect(()=>{
+    setSelectedEstoque(params.estoque)
+    
     api.get('/estoques').then(response=>{
       setEstoques(response.data)
     })
-  })
 
+  },[params.estoque])
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target
