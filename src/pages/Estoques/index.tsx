@@ -70,10 +70,6 @@ const Estoques = ()=> {
                         {estoque.quantidade_produtos}<span>{estoque.quantidade_produtos>1?'itens':'item'}</span>
                       </div>
                     </div>
-                    <div className="footer-estoque">
-                      <p className="alerta-amarelo">03 itens próximos ao vencimento</p>
-                      <p className="alerta-vermelho">04 itens vencidos</p>
-                    </div>
                   </div>
                 </Col>
               ))}
