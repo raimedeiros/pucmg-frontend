@@ -30,7 +30,6 @@ const Estoques = ()=> {
 
   function handleEstoqueSelecionado(estoque:number){
     setEstoqueSelecionado(estoque)
-    console.log(estoqueSelecionado);
   }
 
   return(

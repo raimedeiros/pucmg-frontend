@@ -40,7 +40,6 @@ const CreateEstoque = () => {
   async function handleSubmit(event:FormEvent) {
     event.preventDefault()
     const { name } = formData
-    console.log(name,selectedTipoEstoque)
     const data = {
       name,
       type:selectedTipoEstoque
