@@ -1,89 +1,112 @@
-import React, {useState, FormEvent, ChangeEvent, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
-import {Container, Col, Row} from 'react-grid-system'
-import './estoques.css'
-import {FiBox} from 'react-icons/fi'
-import Menu from '../Menu'
-import api from '../../services/api'
+import React, { useState, FormEvent, ChangeEvent, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Container, Col, Row } from 'react-grid-system';
+import { FiBox } from 'react-icons/fi';
 
-interface TiposEstoque{
-  id:number;
-  name:string;
+import './estoques.css';
+import Menu from '../Menu';
+import api from '../../services/api';
+
+interface TiposEstoque {
+  id: number;
+  name: string;
 }
-const CreateEstoque = () => {
-
-  const [tiposEstoque,setTiposEstoque] = useState<TiposEstoque[]>([])
-  const [selectedTipoEstoque,setSelectedTipoEstoque] = useState('0')
+const CreateEstoque: React.FC = () => {
+  const [tiposEstoque, setTiposEstoque] = useState<TiposEstoque[]>([]);
+  const [selectedTipoEstoque, setSelectedTipoEstoque] = useState('0');
   const [formData, setFormData] = useState({
     name: '',
     type: '',
-  })
-  const history = useHistory()
+  });
+  const history = useHistory();
 
-  useEffect(()=>{
-    api.get('/tipos-estoques').then(response=>{
-      setTiposEstoque(response.data)
-    })
-  },[])
+  useEffect(() => {
+    api.get('/tipos-estoques').then(response => {
+      setTiposEstoque(response.data);
+    });
+  }, []);
 
-
-  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
-    const { name, value } = event.target
-    setFormData({...formData,[name]:value})
+  async function handleInputChange(
+    event: ChangeEvent<HTMLInputElement>,
+  ): Promise<void> {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
   }
 
-  function handleSelectedTipoEstoque(event:ChangeEvent<HTMLSelectElement>){
-    const tipoEstoque = event.target.value
-    setSelectedTipoEstoque(tipoEstoque)
+  async function handleSelectedTipoEstoque(
+    event: ChangeEvent<HTMLSelectElement>,
+  ): Promise<void> {
+    const tipoEstoque = event.target.value;
+    setSelectedTipoEstoque(tipoEstoque);
   }
 
-  async function handleSubmit(event:FormEvent) {
-    event.preventDefault()
-    const { name } = formData
+  async function handleSubmit(event: FormEvent): Promise<void> {
+    event.preventDefault();
+    const { name } = formData;
     const data = {
       name,
-      type:selectedTipoEstoque
-    }
-    await api.post('estoques',data)
-    alert("estoque criado")
-    history.push('/estoques')
+      type: selectedTipoEstoque,
+    };
+    await api.post('estoques', data);
+    history.push('/estoques');
   }
-  
-  return(
-<Container id="page-estoques">
+
+  return (
+    <Container id="page-estoques">
       <Row className="main-row">
         <Col md={2}>
-          <Menu></Menu>
+          <Menu />
         </Col>
 
         <Col className="content-page" md={10}>
           <div className="main-padding">
             <Row>
               <Col className="titulo-pagina">
-                <h1><FiBox></FiBox>Adicionar estoque</h1>
+                <h1>
+                  <FiBox />
+                  Adicionar estoque
+                </h1>
               </Col>
             </Row>
             <Row>
               <Col>
-                <form className="form-padrao" onSubmit={handleSubmit}> 
+                <form className="form-padrao" onSubmit={handleSubmit}>
                   <div className="field">
-                    <label htmlFor="name">Nome</label>
-                    <div className="input-box">
-                      <input type="text" name="name" id="name" onChange={handleInputChange}/>
-                    </div>
+                    <label htmlFor="name">
+                      Nome
+                      <div className="input-box">
+                        <input
+                          type="text"
+                          name="name"
+                          id="name"
+                          onChange={handleInputChange}
+                        />
+                      </div>
+                    </label>
                   </div>
                   <div className="field">
-                    <label htmlFor="type">Tipo</label>
-                    <select name="type" id="type" value={selectedTipoEstoque} onChange={handleSelectedTipoEstoque}>
-                      <option value="0">Selecione um tipo de estoque</option>
-                      {tiposEstoque.map(tipoEstoque=>(
-                        <option key={tipoEstoque.id} value={tipoEstoque.id}>{tipoEstoque.name}</option>
-                      ))}
-                    </select>
+                    <label htmlFor="type">
+                      Tipo
+                      <select
+                        name="type"
+                        id="type"
+                        value={selectedTipoEstoque}
+                        onChange={handleSelectedTipoEstoque}
+                      >
+                        <option value="0">Selecione um tipo de estoque</option>
+                        {tiposEstoque.map(tipoEstoque => (
+                          <option key={tipoEstoque.id} value={tipoEstoque.id}>
+                            {tipoEstoque.name}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
                   </div>
                   <div className="submit-button">
-                    <button type="submit" className="button-roxo">Salvar</button>
-                  </div>  
+                    <button type="submit" className="button-roxo">
+                      Salvar
+                    </button>
+                  </div>
                 </form>
               </Col>
             </Row>
@@ -91,7 +114,7 @@ const CreateEstoque = () => {
         </Col>
       </Row>
     </Container>
-  )
-}
+  );
+};
 
-export default CreateEstoque
+export default CreateEstoque;

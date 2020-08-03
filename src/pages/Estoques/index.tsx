@@ -1,63 +1,76 @@
-import React, { useEffect, useState } from 'react'
-import {Container, Col, Row} from 'react-grid-system'
-import './estoques.css'
-import {FiBox,FiPlusCircle} from 'react-icons/fi'
-import Menu from '../Menu'
-import api from '../../services/api'
-import Produtos from '../Produtos'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Container, Col, Row } from 'react-grid-system';
+import './estoques.css';
+import { FiBox, FiPlusCircle } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import Menu from '../Menu';
+import api from '../../services/api';
+import Produtos from '../Produtos';
 
-interface Estoque{
-  id:number;
-  name:string;
-  type:string;
-  quantidade_produtos:number
+interface Estoque {
+  id: number;
+  name: string;
+  type: string;
+  quantidade_produtos: number;
 }
-interface Produto{
-  id:number;
-  name:string;
+interface Produto {
+  id: number;
+  name: string;
 }
-const Estoques = ()=> {
+const Estoques: React.FC = () => {
+  const [estoques, setEstoques] = useState<Estoque[]>([]);
+  const [estoqueSelecionado, setEstoqueSelecionado] = useState(0);
 
-  const [estoques,setEstoques] = useState<Estoque[]>([])
-  const [estoqueSelecionado,setEstoqueSelecionado] = useState(0)
+  useEffect(() => {
+    api.get('estoques').then(response => {
+      setEstoques(response.data);
+    });
+  }, []);
 
-  useEffect(()=>{
-    api.get('estoques').then(response=>{
-      setEstoques(response.data)
-    })
-  },[])
-
-  function handleEstoqueSelecionado(estoque:number){
-    setEstoqueSelecionado(estoque)
+  async function handleEstoqueSelecionado(estoque: number): Promise<void> {
+    setEstoqueSelecionado(estoque);
   }
 
-  return(
+  return (
     <Container id="page-estoques">
       <Row className="main-row">
         <Col md={2}>
-          <Menu></Menu>
+          <Menu />
         </Col>
 
         <Col className="content-page" md={10}>
           <div className="main-padding">
             <Row>
               <Col className="titulo-pagina">
-                <h1><FiBox></FiBox>Estoques</h1>
+                <h1>
+                  <FiBox />
+                  Estoques
+                </h1>
               </Col>
               <Col className="adicionar-item">
-                <Link to='/estoques/create'>
-                  <button className="button-roxo"><FiPlusCircle></FiPlusCircle>Adicionar estoque</button>
-                </Link> 
+                <Link to="/estoques/create">
+                  <button type="button" className="button-roxo">
+                    <FiPlusCircle />
+                    Adicionar estoque
+                  </button>
+                </Link>
               </Col>
             </Row>
             <Row>
-              {estoques.map(estoque=>(
+              {estoques.map(estoque => (
                 <Col md={4} key={estoque.id}>
-                  <div className="card-estoque" onClick={()=>handleEstoqueSelecionado(estoque.id)}>
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    onKeyPress={() => handleEstoqueSelecionado(estoque.id)}
+                    className="card-estoque"
+                    onClick={() => handleEstoqueSelecionado(estoque.id)}
+                  >
                     <div className="head-estoque">
                       <div className="icon-estoque">
-                        <span><FiBox></FiBox></span>
+                        <span>
+                          <FiBox />
+                        </span>
                       </div>
                       <div className="box-titulo-estoque">
                         <div className="titulo-estoque">{estoque.name}</div>
@@ -66,7 +79,10 @@ const Estoques = ()=> {
                     </div>
                     <div className="body-estoque">
                       <div className="quantidade-itens">
-                        {estoque.quantidade_produtos}<span>{estoque.quantidade_produtos>1?'itens':'item'}</span>
+                        {estoque.quantidade_produtos}
+                        <span>
+                          {estoque.quantidade_produtos > 1 ? 'itens' : 'item'}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -75,18 +91,17 @@ const Estoques = ()=> {
             </Row>
             <Row>
               <Col>
-                {
-                  estoqueSelecionado>0 ? (
-                    <Produtos estoqueSelecionado={estoqueSelecionado}></Produtos>
-                  )
-                  : ('')
-                }
+                {estoqueSelecionado > 0 ? (
+                  <Produtos estoqueSelecionado={estoqueSelecionado} />
+                ) : (
+                  ''
+                )}
               </Col>
             </Row>
           </div>
         </Col>
       </Row>
     </Container>
-  )
-}
-export default Estoques
+  );
+};
+export default Estoques;

@@ -44,7 +44,7 @@ body{
   padding-left: 80px;
 }
 
-.form-padrao label{
+.form-padrao label, .labelDate{
   font-weight:700;
 }
 .form-padrao .field input[type=text]{

@@ -1,25 +1,33 @@
-import React from 'react'
-import LogoMin from '../../assets/Logo-min.svg'
-import './menu.css'
-import {FiHome} from 'react-icons/fi'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FiHome } from 'react-icons/fi';
 
-const Menu = () => {
-  return(
+import LogoMin from '../../assets/Logo-min.svg';
+import './menu.css';
+
+const Menu: React.FC = () => {
+  return (
     <div id="page-menu">
       <div className="menu-logo">
-        <img src={LogoMin} alt="Logo"></img>
+        <img src={LogoMin} alt="Logo" />
       </div>
       <div className="breadcrumbs">
-        <FiHome></FiHome> Início {'>'} Estoque
+        <FiHome />
+        <div>
+          Início
+          {'>'}
+          Estoque
+        </div>
       </div>
       <ul className="lista-menu">
-        <li><Link to="/estoques">Estoques</Link></li>
+        <li>
+          <Link to="/estoques">Estoques</Link>
+        </li>
         <li>Funcionários</li>
         <li>Desperdícios</li>
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;
