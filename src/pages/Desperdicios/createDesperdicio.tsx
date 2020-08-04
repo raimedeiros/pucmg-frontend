@@ -3,7 +3,6 @@ import { useRouteMatch, useHistory } from 'react-router-dom';
 import { Container, Col, Row } from 'react-grid-system';
 import { FiBox, FiCheckCircle } from 'react-icons/fi';
 
-import { isToday } from 'date-fns';
 import api from '../../services/api';
 import Menu from '../Menu';
 
@@ -30,7 +29,7 @@ const CreateProduto: React.FC = () => {
 
   async function handleAddDesperdicio(): Promise<void> {
     if (produto) {
-      const { name, expires, amount } = produto;
+      const { name, amount } = produto;
       const today = new Date();
       const desperdício = {
         name,
