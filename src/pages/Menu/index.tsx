@@ -23,10 +23,10 @@ const Menu: React.FC = () => {
         <li>
           <Link to="/estoques">Estoques</Link>
         </li>
-        <li>Funcionários</li>
         <li>
           <Link to="/desperdicios">Desperdícios</Link>
         </li>
+        <li>Funcionários</li>
       </ul>
     </div>
   );
