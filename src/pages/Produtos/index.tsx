@@ -107,7 +107,7 @@ const Produtos: React.FC<ProdutoProps> = ({
       </Row>
       <Row>
         <Col>
-          <table className="lista-produtos">
+          <table className="lista-tabela-padrao">
             <thead>
               <tr>
                 <th className="cell-name">Produto</th>

@@ -74,3 +74,45 @@ body{
   margin-bottom:30px;
   min-width:350px;
 }
+
+
+.lista-tabela-padrao{
+  width: 100%;
+ margin-top:30px;
+  background-color: #FFF;
+  padding:50px;
+  border:1px solid #EDEDED;
+}
+.lista-tabela-padrao thead tr th{
+  padding-bottom:20px;
+  color:#640893;
+  font-weight: 500;
+}
+.lista-tabela-padrao .cell-actions svg{
+  padding:0 10px;
+  color:#640893;
+}
+.lista-tabela-padrao .cell-expires,.lista-tabela-padrao .cell-amount,.lista-tabela-padrao .cell-actions{
+  text-align: center;
+}
+.lista-tabela-padrao .cell-expires.red{
+  color:#EA1616;
+}
+.lista-tabela-padrao .cell-expires.yellow{
+  color:#E5A515;
+}
+.lista-tabela-padrao .cell-expires.green{
+  color:green
+}
+.lista-tabela-padrao .linha-produto td{
+  border-bottom: 1px solid #E0E0E0;
+  padding:10px 0;
+}
+.lista-tabela-padrao .linha-produto .cell-name{
+  text-align: left;
+  width: 70%;
+  padding: 10px 10px;
+}
+.lista-tabela-padrao thead .cell-name{
+  text-align: left;
+}

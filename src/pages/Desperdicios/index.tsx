@@ -3,7 +3,6 @@ import { Container, Col, Row } from 'react-grid-system';
 import { FiBox } from 'react-icons/fi';
 import Menu from '../Menu';
 import api from '../../services/api';
-import './desperdicios.css';
 
 interface Desperdicio {
   id: number;
@@ -49,7 +48,7 @@ const Desperdicios: React.FC = () => {
             </Row>
             <Row>
               <Col>
-                <table className="lista-desperdicios">
+                <table className="lista-tabela-padrao">
                   <thead>
                     <tr>
                       <th className="cell-name">Produto</th>

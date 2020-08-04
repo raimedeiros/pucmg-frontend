@@ -1,46 +1,6 @@
 #page-produtos{
   margin-top:50px;
 }
-#page-produtos .lista-produtos{
-  width: 100%;
- margin-top:30px;
-  background-color: #FFF;
-  padding:50px;
-  border:1px solid #EDEDED;
-}
-#page-produtos .lista-produtos thead tr th{
-  padding-bottom:20px;
-  color:#640893;
-  font-weight: 500;
-}
-#page-produtos .lista-produtos .cell-actions svg{
-  padding:0 10px;
-  color:#640893;
-}
-#page-produtos .lista-produtos .cell-expires,#page-produtos .lista-produtos .cell-amount,#page-produtos .lista-produtos .cell-actions{
-  text-align: center;
-}
-#page-produtos .lista-produtos .cell-expires.red{
-  color:#EA1616;
-}
-#page-produtos .lista-produtos .cell-expires.yellow{
-  color:#E5A515;
-}
-#page-produtos .lista-produtos .cell-expires.green{
-  color:green
-}
-#page-produtos .lista-produtos .linha-produto td{
-  border-bottom: 1px solid #E0E0E0;
-  padding:10px 0;
-}
-#page-produtos .lista-produtos .linha-produto .cell-name{
-  text-align: left;
-  width: 70%;
-  padding: 10px 10px;
-}
-#page-produtos .lista-produtos thead .cell-name{
-  text-align: left;
-}
 #page-produtos .alerta-vermelho, #page-produtos .alerta-amarelo{
   font-weight: 700;
   margin: 0px;
