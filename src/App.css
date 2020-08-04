@@ -3,6 +3,22 @@ body{
   font-size: 16px;
   font-weight: 400;
 }
+
+#page{
+  margin-top: 20px;
+ }
+ #page .content-page{
+   background-color: #F8F8F8;
+   border-radius: 50px 10px 0 0;
+ }
+ #page .main-row{
+   height: 100vh;
+ }
+ #page .main-padding{
+   padding-top: 80px;
+   padding-left: 80px;
+ }
+
 .button-roxo{
   background-color: #640893;
   border: 1px solid #8705C9;

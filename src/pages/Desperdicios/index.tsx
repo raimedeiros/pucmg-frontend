@@ -30,7 +30,7 @@ const Desperdicios: React.FC = () => {
     loadDesperdicios();
   }, []);
   return (
-    <Container id="page-desperdicios">
+    <Container id="page">
       <Row className="main-row">
         <Col md={2}>
           <Menu />

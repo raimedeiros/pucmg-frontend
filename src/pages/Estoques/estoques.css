@@ -1,17 +1,3 @@
-#page-estoques{
- margin-top: 20px;
-}
-#page-estoques .content-page{
-  background-color: #F8F8F8;
-  border-radius: 50px 10px 0 0;
-}
-#page-estoques .main-row{
-  height: 100vh;
-}
-#page-estoques .main-padding{
-  padding-top: 80px;
-  padding-left: 80px;
-}
 .card-estoque{
   cursor:pointer;
   background-color: #FFF;

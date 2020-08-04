@@ -32,7 +32,7 @@ const Estoques: React.FC = () => {
   }
 
   return (
-    <Container id="page-estoques">
+    <Container id="page" className="page-estoques">
       <Row className="main-row">
         <Col md={2}>
           <Menu />

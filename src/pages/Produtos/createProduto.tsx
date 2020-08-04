@@ -77,7 +77,7 @@ const CreateProduto: React.FC = () => {
   }
 
   return (
-    <Container id="page-create-produtos">
+    <Container id="page">
       <Row className="main-row">
         <Col md={2}>
           <Menu />

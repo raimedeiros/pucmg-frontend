@@ -52,7 +52,7 @@ const CreateEstoque: React.FC = () => {
   }
 
   return (
-    <Container id="page-estoques">
+    <Container id="page">
       <Row className="main-row">
         <Col md={2}>
           <Menu />
