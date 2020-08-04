@@ -1,4 +1,4 @@
-import React, { useState, FormEvent, ChangeEvent } from 'react';
+import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Container, Col, Row } from 'react-grid-system';
 import { FiBox } from 'react-icons/fi';
@@ -6,11 +6,24 @@ import { FiBox } from 'react-icons/fi';
 import Menu from '../Menu';
 import api from '../../services/api';
 
-const CreateFornecedor: React.FC = () => {
+interface TiposFuncionario {
+  id: number;
+  name: string;
+}
+const CreateFuncionario: React.FC = () => {
+  const [tiposFuncionario, setTiposFuncionario] = useState<TiposFuncionario[]>(
+    [],
+  );
+  const [selectedTipoFuncionario, setSelectedTipoFuncionario] = useState('0');
+  useEffect(() => {
+    api.get('/tipos-funcionarios').then(response => {
+      setTiposFuncionario(response.data);
+    });
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
-    address: '',
-    phone: '',
+    type: '',
   });
   const history = useHistory();
 
@@ -23,14 +36,19 @@ const CreateFornecedor: React.FC = () => {
 
   async function handleSubmit(event: FormEvent): Promise<void> {
     event.preventDefault();
-    const { name, address, phone } = formData;
+    const { name } = formData;
     const data = {
       name,
-      address,
-      phone,
+      type: selectedTipoFuncionario,
     };
-    await api.post('fornecedores', data);
-    history.push('/fornecedores');
+    await api.post('funcionarios', data);
+    history.push('/funcionarios');
+  }
+  async function handleSelectedTipoEstoque(
+    event: ChangeEvent<HTMLSelectElement>,
+  ): Promise<void> {
+    const tipoEstoque = event.target.value;
+    setSelectedTipoFuncionario(tipoEstoque);
   }
 
   return (
@@ -46,7 +64,7 @@ const CreateFornecedor: React.FC = () => {
               <Col className="titulo-pagina">
                 <h1>
                   <FiBox />
-                  Adicionar fornecedor
+                  Adicionar funcionário
                 </h1>
               </Col>
             </Row>
@@ -67,29 +85,25 @@ const CreateFornecedor: React.FC = () => {
                     </label>
                   </div>
                   <div className="field">
-                    <label htmlFor="address">
-                      Endereço
-                      <div className="input-box">
-                        <input
-                          type="text"
-                          name="address"
-                          id="address"
-                          onChange={handleInputChange}
-                        />
-                      </div>
-                    </label>
-                  </div>
-                  <div className="field">
-                    <label htmlFor="phone">
-                      Telefone
-                      <div className="input-box">
-                        <input
-                          type="text"
-                          name="phone"
-                          id="phone"
-                          onChange={handleInputChange}
-                        />
-                      </div>
+                    <label htmlFor="type">
+                      Tipo
+                      <select
+                        name="type"
+                        id="type"
+                        onChange={handleSelectedTipoEstoque}
+                      >
+                        <option value="0">
+                          Selecione um tipo de funcionário
+                        </option>
+                        {tiposFuncionario.map(tipoFuncionario => (
+                          <option
+                            key={tipoFuncionario.id}
+                            value={tipoFuncionario.id}
+                          >
+                            {tipoFuncionario.name}
+                          </option>
+                        ))}
+                      </select>
                     </label>
                   </div>
                   <div className="submit-button">
@@ -107,4 +121,4 @@ const CreateFornecedor: React.FC = () => {
   );
 };
 
-export default CreateFornecedor;
+export default CreateFuncionario;
