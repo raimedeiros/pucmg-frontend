@@ -11,6 +11,10 @@ body{
   color: #FFF;
   font-size: 16px;
   font-weight: 700;
+  cursor: pointer;
+}
+.button-roxo svg{
+  margin-right: 5px;
 }
 .adicionar-item{
   text-align: right;

@@ -126,7 +126,9 @@ const Produtos: React.FC<ProdutoProps> = ({
                   <td className="cell-amount">{produto.amount}</td>
                   <td className="cell-actions">
                     <FiEdit />
-                    <FiTrash2 />
+                    <Link to={`desperdicios/create/${produto.id}`}>
+                      <FiTrash2 />
+                    </Link>
                   </td>
                 </tr>
               ))}

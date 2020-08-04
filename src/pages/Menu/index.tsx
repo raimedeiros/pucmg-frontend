@@ -15,7 +15,7 @@ const Menu: React.FC = () => {
         <FiHome />
         <div>
           Início
-          {'>'}
+          {' > '}
           Estoque
         </div>
       </div>
@@ -24,7 +24,9 @@ const Menu: React.FC = () => {
           <Link to="/estoques">Estoques</Link>
         </li>
         <li>Funcionários</li>
-        <li>Desperdícios</li>
+        <li>
+          <Link to="/desperdicios">Desperdícios</Link>
+        </li>
       </ul>
     </div>
   );
