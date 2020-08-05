@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Container } from 'react-grid-system';
 import { FiShoppingBag, FiPlusCircle } from 'react-icons/fi';
+import ReactExport from 'react-export-excel';
 import api from '../../services/api';
 import Menu from '../Menu';
 
@@ -13,6 +14,10 @@ interface Fornecedor {
 }
 
 const Fornecedores: React.FC = () => {
+  const { ExcelFile } = ReactExport;
+  const { ExcelSheet } = ReactExport.ExcelFile;
+  const { ExcelColumn } = ReactExport.ExcelFile;
+
   const [fornecedores, setFornecedores] = useState<Fornecedor[]>([]);
 
   useEffect(() => {
@@ -66,6 +71,24 @@ const Fornecedores: React.FC = () => {
                     ))}
                   </tbody>
                 </table>
+              </Col>
+            </Row>
+            <Row>
+              <Col className="baixar-dados">
+                <ExcelFile
+                  filename="planilha-de-dados"
+                  element={
+                    <button type="button" className="button-download">
+                      Exportar dados
+                    </button>
+                  }
+                >
+                  <ExcelSheet data={fornecedores} name="Fornecedores">
+                    <ExcelColumn label="Nome" value="name" />
+                    <ExcelColumn label="Endereço" value="address" />
+                    <ExcelColumn label="Telefone" value="phone" />
+                  </ExcelSheet>
+                </ExcelFile>
               </Col>
             </Row>
           </div>

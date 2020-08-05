@@ -29,6 +29,7 @@
       "prettier"
   ],
   "rules": {
+    "react/jsx-wrap-multilines":"off",
     "camelcase": "off",
     "react/jsx-one-espression-per-line": "off",
     "react-hooks/rules-of-hooks": "error",

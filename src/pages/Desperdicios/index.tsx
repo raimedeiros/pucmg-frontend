@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Col, Row } from 'react-grid-system';
 import { FiBox } from 'react-icons/fi';
+import ReactExport from 'react-export-excel';
 import Menu from '../Menu';
 import api from '../../services/api';
 
@@ -13,6 +14,10 @@ interface Desperdicio {
 }
 
 const Desperdicios: React.FC = () => {
+  const { ExcelFile } = ReactExport;
+  const { ExcelSheet } = ReactExport.ExcelFile;
+  const { ExcelColumn } = ReactExport.ExcelFile;
+
   const [desperdicios, setDesperdicios] = useState<Desperdicio[]>([]);
 
   useEffect(() => {
@@ -68,6 +73,24 @@ const Desperdicios: React.FC = () => {
                     ))}
                   </tbody>
                 </table>
+              </Col>
+            </Row>
+            <Row>
+              <Col className="baixar-dados">
+                <ExcelFile
+                  filename="planilha-de-dados"
+                  element={
+                    <button type="button" className="button-download">
+                      Exportar dados
+                    </button>
+                  }
+                >
+                  <ExcelSheet data={desperdicios} name="Desperdícios">
+                    <ExcelColumn label="Produto" value="name" />
+                    <ExcelColumn label="Quantidade" value="amount" />
+                    <ExcelColumn label="Data" value="formattedDate" />
+                  </ExcelSheet>
+                </ExcelFile>
               </Col>
             </Row>
           </div>

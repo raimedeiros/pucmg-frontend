@@ -3,6 +3,7 @@ import { Col, Row } from 'react-grid-system';
 import { FiShoppingBag, FiPlusCircle, FiEdit, FiTrash2 } from 'react-icons/fi';
 import './produtos.css';
 import { Link } from 'react-router-dom';
+import ReactExport from 'react-export-excel';
 import api from '../../services/api';
 
 type ProdutoProps = {
@@ -24,6 +25,10 @@ interface AlertaProdutos {
 const Produtos: React.FC<ProdutoProps> = ({
   estoqueSelecionado,
 }: ProdutoProps) => {
+  const { ExcelFile } = ReactExport;
+  const { ExcelSheet } = ReactExport.ExcelFile;
+  const { ExcelColumn } = ReactExport.ExcelFile;
+
   const [produtos, setProdutos] = useState<Produto[]>([]);
   const [alertaProdutos, setAlertaProdutos] = useState<AlertaProdutos>(
     {} as AlertaProdutos,
@@ -134,6 +139,24 @@ const Produtos: React.FC<ProdutoProps> = ({
               ))}
             </tbody>
           </table>
+        </Col>
+      </Row>
+      <Row>
+        <Col className="baixar-dados">
+          <ExcelFile
+            filename="planilha-de-dados"
+            element={
+              <button type="button" className="button-download">
+                Exportar dados
+              </button>
+            }
+          >
+            <ExcelSheet data={produtos} name="Produtos">
+              <ExcelColumn label="Produto" value="name" />
+              <ExcelColumn label="Validade" value="formattedExpires" />
+              <ExcelColumn label="Quantidade" value="amount" />
+            </ExcelSheet>
+          </ExcelFile>
         </Col>
       </Row>
     </div>

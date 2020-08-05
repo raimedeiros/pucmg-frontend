@@ -19,7 +19,7 @@ body{
    padding-left: 80px;
  }
 
-.button-roxo{
+.button-roxo, .button-download{
   background-color: #640893;
   border: 1px solid #8705C9;
   border-radius: 10px;
@@ -28,6 +28,23 @@ body{
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
+}
+.baixar-dados{
+  text-align: center;
+}
+.button-download{
+  background-color: #388E3C;
+  border:1px solid #2E7D32;
+  padding:10px;
+  font-weight: 400;
+  margin:20px  auto;
+}
+.button-download:hover{
+  background-color: #2E7D32;
+  border:1px solid #388E3C;
+  padding:10px;
+  font-weight: 400;
+  margin:20px  auto;
 }
 .button-roxo svg{
   margin-right: 5px;
