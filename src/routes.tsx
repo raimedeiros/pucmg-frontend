@@ -32,7 +32,7 @@ const Routes: React.FC = () => {
         <Route component={CreateFornecedor} path="/fornecedores/create" exact />
         <Route
           component={CreateFuncionario}
-          path="/funcionarios/create/:funcionario"
+          path="/funcionarios/create/:funcionario?"
         />
         <Route
           component={RelatorioDesperdicios}
