@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import './login.css';
 import { FiLogIn, FiPlusCircle, FiUser, FiKey } from 'react-icons/fi';
 import { Container, Row, Col } from 'react-grid-system';
-import Logo from '../../assets/Logo.svg';
+import logo from '../../assets/Logo.svg';
 
 const Login: React.FC = () => {
   return (
     <Container fluid id="page-login">
       <Row className="content">
         <Col className="logo" xs={12} offset={{ md: 4 }} md={4}>
-          <img src={Logo} alt="logo" />
+          <img src={logo} alt="logo" />
         </Col>
         <Col xs={12} md={4} offset={{ md: 4 }}>
           <form>
