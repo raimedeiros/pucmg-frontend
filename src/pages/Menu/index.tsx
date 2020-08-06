@@ -32,6 +32,9 @@ const Menu: React.FC = () => {
         <li>
           <Link to="/funcionarios">Funcionários</Link>
         </li>
+        <li>
+          <Link to="/relatorios/desperdicios">Relatório</Link>
+        </li>
       </ul>
     </div>
   );
