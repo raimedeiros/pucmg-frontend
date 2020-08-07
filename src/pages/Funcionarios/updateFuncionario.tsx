@@ -10,11 +10,11 @@ interface TiposFuncionario {
   id: number;
   name: string;
 }
-interface CreateFuncionarioParams {
+interface UpdateFuncionarioParams {
   funcionario: string;
 }
-const CreateFuncionario: React.FC = () => {
-  const { params } = useRouteMatch<CreateFuncionarioParams>();
+const UpdateFuncionario: React.FC = () => {
+  const { params } = useRouteMatch<UpdateFuncionarioParams>();
 
   const [tiposFuncionario, setTiposFuncionario] = useState<TiposFuncionario[]>(
     [],
@@ -157,4 +157,4 @@ const CreateFuncionario: React.FC = () => {
   );
 };
 
-export default CreateFuncionario;
+export default UpdateFuncionario;
