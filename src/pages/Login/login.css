@@ -15,12 +15,11 @@ body{
 }
 #page-login .logo{
   text-align: center;
+  font-family: 'Dancing Script', cursive;
+  font-size: 5rem;
+  color:#FFF;
 }
-#page-login .logo img{
-  width: 100%;
-  max-width: 388px;
-  height: auto;
-}
+
 #page-login form{
   margin-top:60px;
 }

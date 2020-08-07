@@ -44,7 +44,7 @@ const CreateFuncionario: React.FC = () => {
     <Container fluid id="page-login" className="page-register">
       <Row className="content">
         <Col className="logo" xs={12} offset={{ md: 4 }} md={4}>
-          <img src={logo} alt="logo" />
+          Despensa
         </Col>
         <Col xs={12} md={4} offset={{ md: 4 }}>
           <form className="form-padrao" onSubmit={handleSubmit}>

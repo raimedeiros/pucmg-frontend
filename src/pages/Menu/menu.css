@@ -9,6 +9,8 @@
   }
   #page-menu .menu-logo .logo-img{
     flex-grow: 1;
+    font-family: 'Dancing Script',cursive;
+    font-size: 2rem;
   }
   #page-menu .menu-trigger button{
     background-color: transparent;
@@ -78,5 +80,10 @@
   #page-menu .link-sair svg{
     margin-right:5px;
     vertical-align: text-top;
+  }
+  #page-menu .menu-logo .logo-img{
+    flex-grow: 1;
+    font-family: 'Dancing Script',cursive;
+    font-size: 2rem;
   }
 }

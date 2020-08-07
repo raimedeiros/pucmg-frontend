@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiLogOut, FiMenu } from 'react-icons/fi';
 
-import LogoMin from '../../assets/Logo-min.svg';
 import './menu.css';
 
 const Menu: React.FC = () => {
@@ -24,9 +23,7 @@ const Menu: React.FC = () => {
         }`}
       >
         <div className="menu-logo">
-          <div className="logo-img">
-            <img src={LogoMin} alt="Logo" />
-          </div>
+          <div className="logo-img">Despensa</div>
           <div className="menu-trigger">
             <button type="button" onClick={handleMenu}>
               <FiMenu size={30} />
