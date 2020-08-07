@@ -4,6 +4,7 @@ import { FiBox } from 'react-icons/fi';
 import ReactExport from 'react-export-excel';
 import Menu from '../Menu';
 import api from '../../services/api';
+import Loader from '../../components/Loader';
 
 interface Desperdicio {
   id: number;
@@ -14,6 +15,7 @@ interface Desperdicio {
 }
 
 const Desperdicios: React.FC = () => {
+  const [loadStatus, setLoadStatus] = useState<boolean>(true);
   const { ExcelFile } = ReactExport;
   const { ExcelSheet } = ReactExport.ExcelFile;
   const { ExcelColumn } = ReactExport.ExcelFile;
@@ -21,6 +23,7 @@ const Desperdicios: React.FC = () => {
   const [desperdicios, setDesperdicios] = useState<Desperdicio[]>([]);
 
   useEffect(() => {
+    setLoadStatus(true);
     async function loadDesperdicios(): Promise<void> {
       const response = await api.get('desperdicios');
       const formattedDesperdicios = response.data.map(
@@ -31,6 +34,7 @@ const Desperdicios: React.FC = () => {
         },
       );
       setDesperdicios(formattedDesperdicios);
+      setLoadStatus(false);
     }
     loadDesperdicios();
   }, []);
@@ -51,48 +55,58 @@ const Desperdicios: React.FC = () => {
                 </h1>
               </Col>
             </Row>
-            <Row>
-              <Col>
-                <table className="lista-tabela-padrao">
-                  <thead>
-                    <tr>
-                      <th className="cell-name">Produto</th>
-                      <th>Quantidade</th>
-                      <th>Data</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {desperdicios.map(desperdicio => (
-                      <tr className="linha-desperdicio" key={desperdicio.id}>
-                        <td className="cell-name">{desperdicio.name}</td>
-                        <td className="cell-amount">{desperdicio.amount}</td>
-                        <td className="cell-amount">
-                          {desperdicio.formattedDate}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </Col>
-            </Row>
-            <Row>
-              <Col className="baixar-dados">
-                <ExcelFile
-                  filename="planilha-de-dados"
-                  element={
-                    <button type="button" className="button-download">
-                      Exportar dados
-                    </button>
-                  }
-                >
-                  <ExcelSheet data={desperdicios} name="Desperdícios">
-                    <ExcelColumn label="Produto" value="name" />
-                    <ExcelColumn label="Quantidade" value="amount" />
-                    <ExcelColumn label="Data" value="formattedDate" />
-                  </ExcelSheet>
-                </ExcelFile>
-              </Col>
-            </Row>
+            {loadStatus && <Loader />}
+            {!loadStatus && (
+              <>
+                <Row>
+                  <Col>
+                    <table className="lista-tabela-padrao">
+                      <thead>
+                        <tr>
+                          <th className="cell-name">Produto</th>
+                          <th>Quantidade</th>
+                          <th>Data</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {desperdicios.map(desperdicio => (
+                          <tr
+                            className="linha-desperdicio"
+                            key={desperdicio.id}
+                          >
+                            <td className="cell-name">{desperdicio.name}</td>
+                            <td className="cell-amount">
+                              {desperdicio.amount}
+                            </td>
+                            <td className="cell-amount">
+                              {desperdicio.formattedDate}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="baixar-dados">
+                    <ExcelFile
+                      filename="planilha-de-dados"
+                      element={
+                        <button type="button" className="button-download">
+                          Exportar dados
+                        </button>
+                      }
+                    >
+                      <ExcelSheet data={desperdicios} name="Desperdícios">
+                        <ExcelColumn label="Produto" value="name" />
+                        <ExcelColumn label="Quantidade" value="amount" />
+                        <ExcelColumn label="Data" value="formattedDate" />
+                      </ExcelSheet>
+                    </ExcelFile>
+                  </Col>
+                </Row>
+              </>
+            )}
           </div>
         </Col>
       </Row>

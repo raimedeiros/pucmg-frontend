@@ -5,6 +5,7 @@ import { FiShoppingBag, FiPlusCircle } from 'react-icons/fi';
 import ReactExport from 'react-export-excel';
 import api from '../../services/api';
 import Menu from '../Menu';
+import Loader from '../../components/Loader';
 
 interface Fornecedor {
   id: string;
@@ -14,6 +15,7 @@ interface Fornecedor {
 }
 
 const Fornecedores: React.FC = () => {
+  const [loadStatus, setLoadStatus] = useState<boolean>(true);
   const { ExcelFile } = ReactExport;
   const { ExcelSheet } = ReactExport.ExcelFile;
   const { ExcelColumn } = ReactExport.ExcelFile;
@@ -21,8 +23,10 @@ const Fornecedores: React.FC = () => {
   const [fornecedores, setFornecedores] = useState<Fornecedor[]>([]);
 
   useEffect(() => {
+    setLoadStatus(true);
     api.get('fornecedores').then(response => {
       setFornecedores(response.data);
+      setLoadStatus(false);
     });
   }, []);
 
@@ -51,46 +55,53 @@ const Fornecedores: React.FC = () => {
                 </Link>
               </Col>
             </Row>
-            <Row>
-              <Col>
-                <table className="lista-tabela-padrao">
-                  <thead>
-                    <tr>
-                      <th className="cell-name">Fornecedor</th>
-                      <th>Endereço</th>
-                      <th>Telefone</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {fornecedores.map(fornecedor => (
-                      <tr className="linha-fornecedor" key={fornecedor.id}>
-                        <td className="cell-name">{fornecedor.name}</td>
-                        <td className="cell-amount">{fornecedor.address}</td>
-                        <td className="cell-actions">{fornecedor.phone}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </Col>
-            </Row>
-            <Row>
-              <Col className="baixar-dados">
-                <ExcelFile
-                  filename="planilha-de-dados"
-                  element={
-                    <button type="button" className="button-download">
-                      Exportar dados
-                    </button>
-                  }
-                >
-                  <ExcelSheet data={fornecedores} name="Fornecedores">
-                    <ExcelColumn label="Nome" value="name" />
-                    <ExcelColumn label="Endereço" value="address" />
-                    <ExcelColumn label="Telefone" value="phone" />
-                  </ExcelSheet>
-                </ExcelFile>
-              </Col>
-            </Row>
+            {loadStatus && <Loader />}
+            {!loadStatus && (
+              <>
+                <Row>
+                  <Col>
+                    <table className="lista-tabela-padrao">
+                      <thead>
+                        <tr>
+                          <th className="cell-name">Fornecedor</th>
+                          <th>Endereço</th>
+                          <th>Telefone</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {fornecedores.map(fornecedor => (
+                          <tr className="linha-fornecedor" key={fornecedor.id}>
+                            <td className="cell-name">{fornecedor.name}</td>
+                            <td className="cell-amount">
+                              {fornecedor.address}
+                            </td>
+                            <td className="cell-actions">{fornecedor.phone}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="baixar-dados">
+                    <ExcelFile
+                      filename="planilha-de-dados"
+                      element={
+                        <button type="button" className="button-download">
+                          Exportar dados
+                        </button>
+                      }
+                    >
+                      <ExcelSheet data={fornecedores} name="Fornecedores">
+                        <ExcelColumn label="Nome" value="name" />
+                        <ExcelColumn label="Endereço" value="address" />
+                        <ExcelColumn label="Telefone" value="phone" />
+                      </ExcelSheet>
+                    </ExcelFile>
+                  </Col>
+                </Row>
+              </>
+            )}
           </div>
         </Col>
       </Row>

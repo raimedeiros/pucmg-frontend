@@ -24,6 +24,7 @@ const Estoques: React.FC = () => {
   const [loadStatus, setLoadStatus] = useState<boolean>(true);
 
   useEffect(() => {
+    setLoadStatus(true);
     api.get('estoques').then(response => {
       setEstoques(response.data);
       setLoadStatus(false);

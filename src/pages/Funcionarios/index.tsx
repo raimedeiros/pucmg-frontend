@@ -5,6 +5,7 @@ import { FiShoppingBag, FiEdit, FiDelete } from 'react-icons/fi';
 import ReactExport from 'react-export-excel';
 import api from '../../services/api';
 import Menu from '../Menu';
+import Loader from '../../components/Loader';
 
 interface Fornecedor {
   id: string;
@@ -13,6 +14,7 @@ interface Fornecedor {
 }
 
 const Fornecedores: React.FC = () => {
+  const [loadStatus, setLoadStatus] = useState<boolean>(true);
   const { ExcelFile } = ReactExport;
   const { ExcelSheet } = ReactExport.ExcelFile;
   const { ExcelColumn } = ReactExport.ExcelFile;
@@ -20,8 +22,10 @@ const Fornecedores: React.FC = () => {
   const [funcionarios, setFuncionarios] = useState<Fornecedor[]>([]);
 
   useEffect(() => {
+    setLoadStatus(true);
     api.get('funcionarios').then(response => {
       setFuncionarios(response.data);
+      setLoadStatus(false);
     });
   }, []);
 
@@ -42,52 +46,64 @@ const Fornecedores: React.FC = () => {
                 </h1>
               </Col>
             </Row>
-            <Row>
-              <Col>
-                <table className="lista-tabela-padrao">
-                  <thead>
-                    <tr>
-                      <th className="cell-name">Funcionário</th>
-                      <th>Cargo</th>
-                      <th>Ações</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {funcionarios.map(funcionario => (
-                      <tr className="linha-funcionario" key={funcionario.id}>
-                        <td className="cell-name">{funcionario.name}</td>
-                        <td className="cell-amount">{funcionario.type}</td>
-                        <td className="cell-actions">
-                          <Link to={`funcionarios/update/${funcionario.id}`}>
-                            <FiEdit />
-                          </Link>
-                          <Link to={`funcionarios/delete/${funcionario.id}`}>
-                            <FiDelete />
-                          </Link>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </Col>
-            </Row>
-            <Row>
-              <Col className="baixar-dados">
-                <ExcelFile
-                  filename="planilha-de-dados"
-                  element={
-                    <button type="button" className="button-download">
-                      Exportar dados
-                    </button>
-                  }
-                >
-                  <ExcelSheet data={funcionarios} name="Funcionários">
-                    <ExcelColumn label="Funcionário" value="name" />
-                    <ExcelColumn label="Tipo" value="type" />
-                  </ExcelSheet>
-                </ExcelFile>
-              </Col>
-            </Row>
+            {loadStatus && <Loader />}
+            {!loadStatus && (
+              <>
+                <Row>
+                  <Col>
+                    <table className="lista-tabela-padrao">
+                      <thead>
+                        <tr>
+                          <th className="cell-name">Funcionário</th>
+                          <th>Cargo</th>
+                          <th>Ações</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {funcionarios.map(funcionario => (
+                          <tr
+                            className="linha-funcionario"
+                            key={funcionario.id}
+                          >
+                            <td className="cell-name">{funcionario.name}</td>
+                            <td className="cell-amount">{funcionario.type}</td>
+                            <td className="cell-actions">
+                              <Link
+                                to={`funcionarios/update/${funcionario.id}`}
+                              >
+                                <FiEdit />
+                              </Link>
+                              <Link
+                                to={`funcionarios/delete/${funcionario.id}`}
+                              >
+                                <FiDelete />
+                              </Link>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="baixar-dados">
+                    <ExcelFile
+                      filename="planilha-de-dados"
+                      element={
+                        <button type="button" className="button-download">
+                          Exportar dados
+                        </button>
+                      }
+                    >
+                      <ExcelSheet data={funcionarios} name="Funcionários">
+                        <ExcelColumn label="Funcionário" value="name" />
+                        <ExcelColumn label="Tipo" value="type" />
+                      </ExcelSheet>
+                    </ExcelFile>
+                  </Col>
+                </Row>
+              </>
+            )}
           </div>
         </Col>
       </Row>
