@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Col, Row } from 'react-grid-system';
+import { Container, Col, Row, Hidden } from 'react-grid-system';
 import './estoques.css';
 import { FiBox, FiPlusCircle } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
@@ -41,13 +41,13 @@ const Estoques: React.FC = () => {
         <Col className="content-page" md={10}>
           <div className="main-padding">
             <Row>
-              <Col className="titulo-pagina">
+              <Col className="titulo-pagina" sm={12} md={6}>
                 <h1>
                   <FiBox />
                   Estoques
                 </h1>
               </Col>
-              <Col className="adicionar-item">
+              <Col className="adicionar-item" sm={12} md={6}>
                 <Link to="/estoques/create">
                   <button type="button" className="button-roxo">
                     <FiPlusCircle />
@@ -77,14 +77,16 @@ const Estoques: React.FC = () => {
                         <div className="tipo-estoque">{estoque.type}</div>
                       </div>
                     </div>
-                    <div className="body-estoque">
-                      <div className="quantidade-itens">
-                        {estoque.quantidade_produtos}
-                        <span>
-                          {estoque.quantidade_produtos > 1 ? 'itens' : 'item'}
-                        </span>
+                    <Hidden xs sm>
+                      <div className="body-estoque">
+                        <div className="quantidade-itens">
+                          {estoque.quantidade_produtos}
+                          <span>
+                            {estoque.quantidade_produtos > 1 ? 'itens' : 'item'}
+                          </span>
+                        </div>
                       </div>
-                    </div>
+                    </Hidden>
                   </div>
                 </Col>
               ))}

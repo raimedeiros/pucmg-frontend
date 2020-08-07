@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FiHome, FiLogOut, FiMenu } from 'react-icons/fi';
+import { FiLogOut, FiMenu } from 'react-icons/fi';
 
 import LogoMin from '../../assets/Logo-min.svg';
 import './menu.css';

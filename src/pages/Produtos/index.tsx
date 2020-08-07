@@ -79,13 +79,13 @@ const Produtos: React.FC<ProdutoProps> = ({
   return (
     <div id="page-produtos">
       <Row>
-        <Col className="titulo-pagina">
+        <Col className="titulo-pagina" sm={12} md={6}>
           <h1>
             <FiShoppingBag />
             Produtos
           </h1>
         </Col>
-        <Col className="adicionar-item">
+        <Col className="adicionar-item" sm={12} md={6}>
           <Link to={`produtos/create/${estoqueSelecionado}`}>
             <button type="button" className="button-roxo">
               <FiPlusCircle />

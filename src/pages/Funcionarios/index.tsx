@@ -41,14 +41,6 @@ const Fornecedores: React.FC = () => {
                   Funcionários
                 </h1>
               </Col>
-              <Col className="adicionar-item">
-                <Link to="/funcionarios/create">
-                  <button type="button" className="button-roxo">
-                    <FiPlusCircle />
-                    Adicionar funcionário
-                  </button>
-                </Link>
-              </Col>
             </Row>
             <Row>
               <Col>

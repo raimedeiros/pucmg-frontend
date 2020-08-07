@@ -54,7 +54,7 @@ const CreateEstoque: React.FC = () => {
   return (
     <Container id="page">
       <Row className="main-row">
-        <Col md={2}>
+        <Col sm={12} md={2}>
           <Menu />
         </Col>
 

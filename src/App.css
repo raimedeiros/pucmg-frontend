@@ -11,14 +11,18 @@ body{
    background-color: #F8F8F8;
    border-radius: 50px 10px 0 0;
  }
+ #page .main-row{
+   height: 100vh;
+ }
  @media(max-width:768px){
   #page .content-page{
     border-radius: 10px;
     margin-top:20px;
+    padding-bottom:40px;
   }
- }
- #page .main-row{
-   height: 100vh;
+  #page .main-row{
+    height: inherit;
+  }
  }
  #page .main-padding{
    padding-top: 80px;
@@ -64,6 +68,15 @@ body{
 }
 .adicionar-item{
   text-align: right;
+}
+@media(max-width:768px){
+  .adicionar-item {
+    text-align: center;
+    margin-bottom:20px;
+  }
+  .adicionar-item button{
+    padding:10px;
+  }
 }
 .adicionar-item button{
   cursor: pointer;
@@ -116,6 +129,9 @@ body{
   min-width:350px;
 }
 
+.form-padrao .submit-button{
+  text-align: center;
+}
 
 .lista-tabela-padrao{
   width: 100%;
@@ -149,6 +165,11 @@ body{
 }
 .lista-tabela-padrao .cell-expires.green{
   color:green
+}
+@media(max-width:768px){
+  .lista-tabela-padrao tbody tr td {
+    padding: 10px;
+  }
 }
 .lista-tabela-padrao .linha-produto td{
   border-bottom: 1px solid #E0E0E0;
