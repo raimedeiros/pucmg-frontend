@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Container } from 'react-grid-system';
-import { FiShoppingBag, FiEdit } from 'react-icons/fi';
+import { FiShoppingBag, FiEdit, FiDelete } from 'react-icons/fi';
 import ReactExport from 'react-export-excel';
 import api from '../../services/api';
 import Menu from '../Menu';
@@ -60,6 +60,9 @@ const Fornecedores: React.FC = () => {
                         <td className="cell-actions">
                           <Link to={`funcionarios/update/${funcionario.id}`}>
                             <FiEdit />
+                          </Link>
+                          <Link to={`funcionarios/delete/${funcionario.id}`}>
+                            <FiDelete />
                           </Link>
                         </td>
                       </tr>

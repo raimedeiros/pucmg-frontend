@@ -12,6 +12,7 @@ import CreateFornecedor from './pages/Fornecedores/createFornecedor';
 import Fornecedores from './pages/Fornecedores';
 import Funcionarios from './pages/Funcionarios';
 import UpdateFuncionario from './pages/Funcionarios/updateFuncionario';
+import DeleteFuncionario from './pages/Funcionarios/deleteFuncionario';
 import RelatorioDesperdicios from './pages/Relatorios/relatorioDesperdicios';
 
 const Routes: React.FC = () => {
@@ -35,6 +36,10 @@ const Routes: React.FC = () => {
         <Route
           component={UpdateFuncionario}
           path="/funcionarios/update/:funcionario?"
+        />
+        <Route
+          component={DeleteFuncionario}
+          path="/funcionarios/delete/:funcionario?"
         />
         <Route
           component={RelatorioDesperdicios}
