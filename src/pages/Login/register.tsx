@@ -2,7 +2,6 @@ import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Container, Col, Row } from 'react-grid-system';
 
-import logo from '../../assets/Logo.svg';
 import api from '../../services/api';
 import './login.css';
 

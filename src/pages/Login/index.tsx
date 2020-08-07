@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import './login.css';
 import { FiLogIn, FiPlusCircle, FiUser, FiKey } from 'react-icons/fi';
 import { Container, Row, Col } from 'react-grid-system';
-import logo from '../../assets/Logo.svg';
 
 const Login: React.FC = () => {
   const history = useHistory();
