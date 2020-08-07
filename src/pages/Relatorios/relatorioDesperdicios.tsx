@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Row, Col, Container } from 'react-grid-system';
 import { FiBarChart2 } from 'react-icons/fi';
-// import { Link } from 'react-router-dom';
+
 import { SimpleBarChart } from '@carbon/charts-react';
 import api from '../../services/api';
 import Menu from '../Menu';
 import '@carbon/charts/styles.css';
+import Loader from '../../components/Loader';
 
 interface Desperdicio {
   id: number;
@@ -21,6 +22,7 @@ interface ChartData {
 }
 
 const RelatorioDesperdicios: React.FC = () => {
+  const [loadStatus, setLoadStatus] = useState<boolean>(true);
   const [chartData, setChartData] = useState<ChartData[]>([
     {
       group: 'Janeiro',
@@ -87,6 +89,7 @@ const RelatorioDesperdicios: React.FC = () => {
   };
 
   useEffect(() => {
+    setLoadStatus(true);
     async function loadChartData(): Promise<void> {
       const response = await api.get('desperdicios');
       const updateChartData = chartData;
@@ -97,6 +100,7 @@ const RelatorioDesperdicios: React.FC = () => {
 
         setChartData([...updateChartData]);
 
+        setLoadStatus(false);
         return desperdicio;
       });
     }
@@ -122,10 +126,15 @@ const RelatorioDesperdicios: React.FC = () => {
               </Col>
             </Row>
             <Row>
-              <Col>
-                <SimpleBarChart data={chartData} options={chartOptions} />
-              </Col>
+              <Col>{loadStatus && <Loader />}</Col>
             </Row>
+            {!loadStatus && (
+              <Row>
+                <Col>
+                  <SimpleBarChart data={chartData} options={chartOptions} />
+                </Col>
+              </Row>
+            )}
           </div>
         </Col>
       </Row>
