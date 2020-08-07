@@ -23,12 +23,14 @@ const CreateFuncionario: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     type: '',
+    email: '',
   });
 
   useEffect(() => {
     api.get(`/funcionarios/${params.funcionario}`).then(response => {
       const funcionario = {
         name: response.data.funcionario.name,
+        email: response.data.funcionario.email,
         type: response.data.tipo_funcionario.tipo,
       };
       setFormData(funcionario);
@@ -52,19 +54,20 @@ const CreateFuncionario: React.FC = () => {
 
   async function handleSubmit(event: FormEvent): Promise<void> {
     event.preventDefault();
-    const { name } = formData;
+    const { name, email } = formData;
     const data = {
       name,
+      email,
       type: selectedTipoFuncionario,
     };
-    await api.post('funcionarios', data);
+    await api.post(`funcionarios/${params.funcionario}`, data);
     history.push('/funcionarios');
   }
-  async function handleSelectedTipoEstoque(
+  async function handleSelectTipoFuncionario(
     event: ChangeEvent<HTMLSelectElement>,
   ): Promise<void> {
-    const tipoEstoque = event.target.value;
-    setSelectedTipoFuncionario(tipoEstoque);
+    const tipoFuncionario = event.target.value;
+    setSelectedTipoFuncionario(tipoFuncionario);
   }
 
   return (
@@ -102,13 +105,27 @@ const CreateFuncionario: React.FC = () => {
                     </label>
                   </div>
                   <div className="field">
+                    <label htmlFor="email">
+                      Email
+                      <div className="input-box">
+                        <input
+                          type="text"
+                          name="email"
+                          id="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                        />
+                      </div>
+                    </label>
+                  </div>
+                  <div className="field">
                     <label htmlFor="type">
                       Tipo
                       <select
                         name="type"
                         id="type"
                         value={formData.type}
-                        onChange={handleSelectedTipoEstoque}
+                        onChange={handleSelectTipoFuncionario}
                       >
                         <option value="0">
                           Selecione um tipo de funcionário

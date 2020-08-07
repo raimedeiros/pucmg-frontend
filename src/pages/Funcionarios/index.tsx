@@ -55,8 +55,8 @@ const Fornecedores: React.FC = () => {
                 <table className="lista-tabela-padrao">
                   <thead>
                     <tr>
-                      <th className="cell-name">Fornecedor</th>
-                      <th>Tipo</th>
+                      <th className="cell-name">Funcionário</th>
+                      <th>Cargo</th>
                       <th>Ações</th>
                     </tr>
                   </thead>
@@ -66,7 +66,7 @@ const Fornecedores: React.FC = () => {
                         <td className="cell-name">{funcionario.name}</td>
                         <td className="cell-amount">{funcionario.type}</td>
                         <td className="cell-actions">
-                          <Link to={`funcionarios/create/${funcionario.id}`}>
+                          <Link to={`funcionarios/update/${funcionario.id}`}>
                             <FiEdit />
                           </Link>
                         </td>

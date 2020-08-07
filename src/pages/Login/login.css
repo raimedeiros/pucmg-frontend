@@ -55,7 +55,8 @@ body{
 }
 
 #page-login form .field input[type=text],
-#page-login form .field input[type=password] {
+#page-login form .field input[type=password],
+#page-login form .field input[type=email] {
   margin-top: 10px;
   flex: 1;
   background: #F0F0F5;
@@ -64,6 +65,10 @@ body{
   padding: 16px 24px;
   font-size: 16px;
   color: #6C6C80;
+  margin-bottom: 0px;
+}
+#page-login.page-register form .field input{
+  border-radius: 10px;
 }
 
 #page-login .novo-usuario{

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiHome } from 'react-icons/fi';
+import { FiHome, FiLogOut } from 'react-icons/fi';
 
 import LogoMin from '../../assets/Logo-min.svg';
 import './menu.css';
@@ -36,6 +36,10 @@ const Menu: React.FC = () => {
           <Link to="/relatorios/desperdicios">Relatório</Link>
         </li>
       </ul>
+      <div className="link-sair">
+        <FiLogOut />
+        <Link to="/">Sair</Link>
+      </div>
     </div>
   );
 };

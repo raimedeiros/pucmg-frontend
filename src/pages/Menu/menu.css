@@ -16,3 +16,7 @@
 #page-menu .lista-menu li{
   padding:5px 0;
 }
+#page-menu .link-sair svg{
+  margin-right:5px;
+  vertical-align: text-top;
+}

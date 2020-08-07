@@ -84,7 +84,9 @@ body{
 .form-padrao label, .labelDate{
   font-weight:700;
 }
-.form-padrao .field input[type=text]{
+.form-padrao .field input[type=text],
+.form-padrao .field input[type=email],
+.form-padrao .field input[type=password]{
   margin-top: 5px;
   background: #F0F0F5;
   border:1px solid #dcdcef;

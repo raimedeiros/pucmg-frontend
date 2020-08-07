@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 
 import Login from './pages/Login';
+import Register from './pages/Login/register';
 import Estoques from './pages/Estoques';
 import CreateEstoque from './pages/Estoques/createEstoque';
 import CreateProduto from './pages/Produtos/createProduto';
@@ -18,6 +19,7 @@ const Routes: React.FC = () => {
     <BrowserRouter>
       <Switch>
         <Route component={Login} path="/" exact />
+        <Route component={Register} path="/register" exact />
         <Route component={Estoques} path="/estoques" exact />
         <Route component={Desperdicios} path="/desperdicios" exact />
         <Route component={Fornecedores} path="/fornecedores" exact />
@@ -32,7 +34,7 @@ const Routes: React.FC = () => {
         <Route component={CreateFornecedor} path="/fornecedores/create" exact />
         <Route
           component={CreateFuncionario}
-          path="/funcionarios/create/:funcionario?"
+          path="/funcionarios/update/:funcionario?"
         />
         <Route
           component={RelatorioDesperdicios}

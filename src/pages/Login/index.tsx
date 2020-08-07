@@ -1,11 +1,17 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { FormEvent } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import './login.css';
 import { FiLogIn, FiPlusCircle, FiUser, FiKey } from 'react-icons/fi';
 import { Container, Row, Col } from 'react-grid-system';
 import logo from '../../assets/Logo.svg';
 
 const Login: React.FC = () => {
+  const history = useHistory();
+
+  async function handleSubmit(event: FormEvent): Promise<void> {
+    event.preventDefault();
+    history.push('/estoques');
+  }
   return (
     <Container fluid id="page-login">
       <Row className="content">
@@ -13,7 +19,7 @@ const Login: React.FC = () => {
           <img src={logo} alt="logo" />
         </Col>
         <Col xs={12} md={4} offset={{ md: 4 }}>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="field">
               <label htmlFor="usuario">
                 Usuário
@@ -44,7 +50,7 @@ const Login: React.FC = () => {
             </div>
           </form>
           <div className="novo-usuario">
-            <Link to="/Estoques">
+            <Link to="/register">
               <FiPlusCircle />
               Criar novo usuário
             </Link>
