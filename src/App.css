@@ -11,12 +11,25 @@ body{
    background-color: #F8F8F8;
    border-radius: 50px 10px 0 0;
  }
+ @media(max-width:768px){
+  #page .content-page{
+    border-radius: 10px;
+    margin-top:20px;
+  }
+ }
  #page .main-row{
    height: 100vh;
  }
  #page .main-padding{
    padding-top: 80px;
    padding-left: 80px;
+ }
+
+ @media(max-width:768px){
+  #page .main-padding{
+    padding-top: 20px;
+    padding-left: 0px;
+  }
  }
 
 .button-roxo, .button-download{
@@ -73,13 +86,6 @@ body{
   background-color: #F8F8F8;
   border-radius: 50px 10px 0 0;
 }
-.main-row{
-  height: 100vh;
-}
-.main-padding{
-  padding-top: 80px;
-  padding-left: 80px;
-}
 
 .form-padrao label, .labelDate{
   font-weight:700;
@@ -117,6 +123,11 @@ body{
   background-color: #FFF;
   padding:50px;
   border:1px solid #EDEDED;
+}
+@media(max-width:768px){
+  .lista-tabela-padrao{
+    padding:20px;
+  }
 }
 .lista-tabela-padrao thead tr th{
   padding-bottom:20px;

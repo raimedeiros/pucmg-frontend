@@ -1,22 +1,82 @@
-#page-menu, #page-menu a{
-  color:#FFF;
-  font-weight: 500;
-  text-decoration: none;
+@media(max-width:768px){
+  #page-menu,#page-menu a{
+    color:#FFF;
+    text-decoration: none;
+  }
+  #page-menu .menu-logo{
+    display:flex;
+    color:#FFF;
+  }
+  #page-menu .menu-logo .logo-img{
+    flex-grow: 1;
+  }
+  #page-menu .menu-trigger button{
+    background-color: transparent;
+    border:none;
+  }
+  #page-menu .menu-trigger{
+      font-weight:700;
+      text-align:right;
+      margin-right:20px;
+      margin-top:10px;
+  }
+  #page-menu .menu-trigger svg{
+    color:#FFF;
+  }
+  #page-menu .responsive-menu .lista-menu{
+    height:0px;
+    overflow: hidden;
+  }
+  #page-menu .responsive-menu.mostrar-menu .lista-menu{
+    height: 100%;
+    margin-bottom:20px;
+  }
+  #page-menu .responsive-menu.mostrar-menu .lista-menu ul{
+    list-style-type: none;
+    padding-left:20px;
+  }
+  #page-menu .responsive-menu.mostrar-menu .lista-menu li{
+    padding:10px 0;
+  }
+  #page-menu .breadcrumbs{
+    margin:20px 20px 10px 20px;
+  }
+  #page-menu .link-sair {
+    margin-left:20px;
+  }
+  #page-menu .link-sair svg{
+    margin-right:5px;
+    vertical-align: text-top;
+  }
 }
-#page-menu a:hover{
-  text-decoration: underline;
-}
-#page-menu .menu-logo{
-  margin:27px 0;
-}
-#page-menu .lista-menu{
-  list-style: none;
-  padding: 10px 0 0 0;
-}
-#page-menu .lista-menu li{
-  padding:5px 0;
-}
-#page-menu .link-sair svg{
-  margin-right:5px;
-  vertical-align: text-top;
+@media(min-width:768px){
+  #page-menu .menu-trigger{
+    display: none;
+  }
+  #page-menu .responsive-menu{
+    display:block;
+  }
+
+  #page-menu, #page-menu a{
+    color:#FFF;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  #page-menu a:hover{
+    text-decoration: underline;
+  }
+  #page-menu .menu-logo{
+    margin:27px 0;
+  }
+  #page-menu .lista-menu ul{
+    list-style: none;
+    padding: 10px 0 0 0;
+  }
+  #page-menu .lista-menu li{
+    padding:5px 0;
+  }
+  #page-menu .link-sair svg{
+    margin-right:5px;
+    vertical-align: text-top;
+  }
 }
