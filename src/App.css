@@ -129,8 +129,10 @@ body{
   min-width:350px;
 }
 
-.form-padrao .submit-button{
-  text-align: center;
+@media(min-width:768px){
+  .form-padrao .submit-button{
+    text-align: left;
+  }
 }
 
 .lista-tabela-padrao{

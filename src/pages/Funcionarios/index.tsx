@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Container } from 'react-grid-system';
-import { FiShoppingBag, FiPlusCircle, FiEdit } from 'react-icons/fi';
+import { FiShoppingBag, FiEdit } from 'react-icons/fi';
 import ReactExport from 'react-export-excel';
 import api from '../../services/api';
 import Menu from '../Menu';
