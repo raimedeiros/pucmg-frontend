@@ -125,9 +125,9 @@ const RelatorioDesperdicios: React.FC = () => {
                 </h1>
               </Col>
             </Row>
-            <Row>
-              <Col>{loadStatus && <Loader />}</Col>
-            </Row>
+
+            {loadStatus && <Loader />}
+
             {!loadStatus && (
               <Row>
                 <Col>
