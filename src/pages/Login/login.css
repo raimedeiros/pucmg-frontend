@@ -87,3 +87,8 @@ body{
 #page-login form .submit-button{
   text-align: center;
 }
+#page-login .info-login-error{
+  color:#FFF;
+  text-align: center;
+  margin-bottom:20px;
+}

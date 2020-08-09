@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FiLogOut, FiMenu } from 'react-icons/fi';
-
 import './menu.css';
 
 const Menu: React.FC = () => {
+  const history = useHistory();
   const [flagMenu, setFlagMenu] = useState<boolean>(false);
 
   async function handleMenu(): Promise<void> {
@@ -13,6 +13,11 @@ const Menu: React.FC = () => {
     } else {
       setFlagMenu(false);
     }
+  }
+
+  function handleLogout(): void {
+    localStorage.removeItem('tokens');
+    history.push('/');
   }
 
   return (
@@ -50,7 +55,9 @@ const Menu: React.FC = () => {
           </ul>
           <div className="link-sair">
             <FiLogOut />
-            <Link to="/">Sair</Link>
+            <button type="button" onClick={handleLogout}>
+              Sair
+            </button>
           </div>
         </div>
       </div>

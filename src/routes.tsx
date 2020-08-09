@@ -1,5 +1,12 @@
-import React from 'react';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/jsx-curly-newline */
+
+import React, { useState } from 'react';
+import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
+import { AuthContext, useAuth } from './context/auth.js';
 
 import Login from './pages/Login';
 import Register from './pages/Login/register';
@@ -15,38 +22,69 @@ import UpdateFuncionario from './pages/Funcionarios/updateFuncionario';
 import DeleteFuncionario from './pages/Funcionarios/deleteFuncionario';
 import RelatorioDesperdicios from './pages/Relatorios/relatorioDesperdicios';
 
-const Routes: React.FC = () => {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route component={Login} path="/" exact />
-        <Route component={Register} path="/register" exact />
-        <Route component={Estoques} path="/estoques" exact />
-        <Route component={Desperdicios} path="/desperdicios" exact />
-        <Route component={Fornecedores} path="/fornecedores" exact />
-        <Route component={Funcionarios} path="/funcionarios" exact />
+const PrivateRoute = ({ component: Component, ...rest }: any) => {
+  const { authTokens } = useAuth();
 
-        <Route component={CreateEstoque} path="/estoques/create" />
-        <Route component={CreateProduto} path="/produtos/create/:estoque" />
-        <Route
-          component={CreateDesperdicios}
-          path="/desperdicios/create/:produto"
-        />
-        <Route component={CreateFornecedor} path="/fornecedores/create" exact />
-        <Route
-          component={UpdateFuncionario}
-          path="/funcionarios/update/:funcionario?"
-        />
-        <Route
-          component={DeleteFuncionario}
-          path="/funcionarios/delete/:funcionario?"
-        />
-        <Route
-          component={RelatorioDesperdicios}
-          path="/relatorios/desperdicios"
-        />
-      </Switch>
-    </BrowserRouter>
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        authTokens ? <Component {...props} /> : <Redirect to="/" />
+      }
+    />
+  );
+};
+
+const Routes: React.FC = () => {
+  const existingTokens = localStorage.getItem('tokens');
+  const [authTokens, setAuthTokens] = useState(existingTokens);
+
+  const setTokens = (data: React.SetStateAction<string | null>) => {
+    localStorage.setItem('tokens', JSON.stringify(data));
+    setAuthTokens(data);
+  };
+
+  return (
+    <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
+      <BrowserRouter>
+        <Switch>
+          <Route component={Login} path="/" exact />
+
+          <PrivateRoute component={Estoques} path="/estoques" exact />
+          <PrivateRoute component={Register} path="/register" exact />
+          <PrivateRoute component={Desperdicios} path="/desperdicios" exact />
+          <PrivateRoute component={Fornecedores} path="/fornecedores" exact />
+          <PrivateRoute component={Funcionarios} path="/funcionarios" exact />
+
+          <PrivateRoute component={CreateEstoque} path="/estoques/create" />
+          <PrivateRoute
+            component={CreateProduto}
+            path="/produtos/create/:estoque"
+          />
+          <PrivateRoute
+            component={CreateDesperdicios}
+            path="/desperdicios/create/:produto"
+          />
+          <PrivateRoute
+            component={CreateFornecedor}
+            path="/fornecedores/create"
+            exact
+          />
+          <PrivateRoute
+            component={UpdateFuncionario}
+            path="/funcionarios/update/:funcionario?"
+          />
+          <PrivateRoute
+            component={DeleteFuncionario}
+            path="/funcionarios/delete/:funcionario?"
+          />
+          <PrivateRoute
+            component={RelatorioDesperdicios}
+            path="/relatorios/desperdicios"
+          />
+        </Switch>
+      </BrowserRouter>
+    </AuthContext.Provider>
   );
 };
 

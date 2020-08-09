@@ -50,8 +50,18 @@
     margin-right:5px;
     vertical-align: text-top;
   }
+
+}
+#page-menu .link-sair button{
+  background-color: transparent;
+  border:none;
+  color:#FFF;
+  font-weight: 700;
+  font-size: inherit;
+  cursor: pointer;
 }
 @media(min-width:768px){
+
   #page-menu .menu-trigger{
     display: none;
   }
