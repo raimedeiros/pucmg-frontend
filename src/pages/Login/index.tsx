@@ -3,7 +3,13 @@ import { Link, useHistory } from 'react-router-dom';
 import './login.css';
 import { FiLogIn, FiPlusCircle, FiUser, FiKey } from 'react-icons/fi';
 import { Container, Row, Col } from 'react-grid-system';
+import FacebookLogin from 'react-facebook-login';
+import api from '../../services/api';
 
+interface FacebookLoginProfile {
+  name: string;
+  email: string;
+}
 const Login: React.FC = () => {
   const history = useHistory();
 
@@ -11,6 +17,20 @@ const Login: React.FC = () => {
     event.preventDefault();
     history.push('/estoques');
   }
+  async function responseFacebook(response: any): Promise<void> {
+    console.log('data facebook: ', response);
+    const funcionarioFacebook = {
+      name: response.name,
+      email: response.email,
+    };
+    console.log(funcionarioFacebook);
+    api.post('funcionarios');
+  }
+
+  async function componentClicked(response: any): Promise<void> {
+    console.log(response);
+  }
+
   return (
     <Container fluid id="page-login">
       <Row className="content">
@@ -53,6 +73,15 @@ const Login: React.FC = () => {
               <FiPlusCircle />
               Criar novo usuário
             </Link>
+          </div>
+          <div>
+            <FacebookLogin
+              appId="1546719762173713"
+              autoLoad
+              fields="name,email,picture"
+              onClick={componentClicked}
+              callback={responseFacebook}
+            />
           </div>
         </Col>
       </Row>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Col, Row, Hidden } from 'react-grid-system';
 import './estoques.css';
 import { FiBox, FiPlusCircle } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import Menu from '../Menu';
 import api from '../../services/api';
 import Produtos from '../Produtos';
@@ -19,11 +19,13 @@ interface Produto {
   name: string;
 }
 const Estoques: React.FC = () => {
+  const { params } = useRouteMatch();
   const [estoques, setEstoques] = useState<Estoque[]>([]);
   const [estoqueSelecionado, setEstoqueSelecionado] = useState(0);
   const [loadStatus, setLoadStatus] = useState<boolean>(true);
 
   useEffect(() => {
+    console.log('params', params);
     setLoadStatus(true);
     api.get('estoques').then(response => {
       setEstoques(response.data);
