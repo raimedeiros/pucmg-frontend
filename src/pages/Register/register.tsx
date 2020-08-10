@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Container, Col, Row } from 'react-grid-system';
 
 import api from '../../services/api';
-import './login.css';
+import '../Login/login.css';
 
 interface TiposFuncionario {
   id: number;

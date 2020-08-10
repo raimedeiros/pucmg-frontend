@@ -9,7 +9,7 @@ import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
 import { AuthContext, useAuth } from './context/auth.js';
 
 import Login from './pages/Login';
-import Register from './pages/Login/register';
+import Register from './pages/Register/register';
 import Estoques from './pages/Estoques';
 import CreateEstoque from './pages/Estoques/createEstoque';
 import CreateProduto from './pages/Produtos/createProduto';
@@ -48,8 +48,8 @@ const Routes: React.FC = () => {
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
       <BrowserRouter>
         <Switch>
+          <Route component={Register} path="/register" />
           <Route component={Login} path="/" exact />
-          <Route component={Register} path="/register" exact />
 
           <PrivateRoute component={Estoques} path="/estoques" exact />
           <PrivateRoute component={Desperdicios} path="/desperdicios" exact />
