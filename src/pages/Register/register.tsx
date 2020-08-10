@@ -5,11 +5,6 @@ import { Container, Col, Row } from 'react-grid-system';
 import api from '../../services/api';
 import '../Login/login.css';
 
-interface TiposFuncionario {
-  id: number;
-  name: string;
-}
-
 const CreateFuncionario: React.FC = () => {
   console.log('register');
   const history = useHistory();
