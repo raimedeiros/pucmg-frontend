@@ -11,14 +11,14 @@ interface TiposFuncionario {
 }
 
 const CreateFuncionario: React.FC = () => {
+  console.log('register');
+  const history = useHistory();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     type: 0,
   });
-
-  const history = useHistory();
 
   async function handleInputChange(
     event: ChangeEvent<HTMLInputElement>,
