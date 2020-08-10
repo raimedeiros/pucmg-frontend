@@ -9,7 +9,6 @@ import './login.css';
 import Loader from '../../components/Loader';
 
 const Login: React.FC = () => {
-  console.log('login');
   const [formData, setFormData] = useState({
     email: '',
     password: '',

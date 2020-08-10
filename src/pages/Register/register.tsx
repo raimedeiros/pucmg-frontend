@@ -6,7 +6,6 @@ import api from '../../services/api';
 import '../Login/login.css';
 
 const CreateFuncionario: React.FC = () => {
-  console.log('register');
   const history = useHistory();
   const [formData, setFormData] = useState({
     name: '',

@@ -24,7 +24,6 @@ import RelatorioDesperdicios from './pages/Relatorios/relatorioDesperdicios';
 
 const PrivateRoute = ({ component: Component, ...rest }: any) => {
   const { authTokens } = useAuth();
-  console.log('private route');
   return (
     <Route
       {...rest}
@@ -36,7 +35,6 @@ const PrivateRoute = ({ component: Component, ...rest }: any) => {
 };
 
 const Routes: React.FC = () => {
-  console.log('route');
   const existingTokens = localStorage.getItem('tokens');
   const [authTokens, setAuthTokens] = useState(existingTokens);
 
