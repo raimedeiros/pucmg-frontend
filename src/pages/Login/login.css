@@ -92,3 +92,19 @@ body{
   text-align: center;
   margin-bottom:20px;
 }
+
+#page-login .loader-component{
+  margin:10px;
+}
+#page-login .loader-component .lds-ring div{
+  border-color:#FFF transparent transparent transparent;
+  width:34px;
+  height:34px;
+}
+#page-login .loader-component .lds-ring{
+  width:50px;
+  height:50px;
+}
+#page-login .loader-component p{
+  display: none;
+}

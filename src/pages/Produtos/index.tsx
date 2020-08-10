@@ -51,7 +51,7 @@ const Produtos: React.FC<ProdutoProps> = ({
 
         let expireStatus = 'green';
 
-        if (daysToExpire < 5 && daysToExpire > 0) {
+        if (daysToExpire < 30 && daysToExpire > 0) {
           expireStatus = 'yellow';
           proximoVencimento += 1;
         }

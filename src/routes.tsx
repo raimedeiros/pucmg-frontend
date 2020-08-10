@@ -9,7 +9,7 @@ import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
 import { AuthContext, useAuth } from './context/auth.js';
 
 import Login from './pages/Login';
-import Register from './pages/Login/register';
+import Register from './pages/Register/register';
 import Estoques from './pages/Estoques';
 import CreateEstoque from './pages/Estoques/createEstoque';
 import CreateProduto from './pages/Produtos/createProduto';
@@ -24,7 +24,7 @@ import RelatorioDesperdicios from './pages/Relatorios/relatorioDesperdicios';
 
 const PrivateRoute = ({ component: Component, ...rest }: any) => {
   const { authTokens } = useAuth();
-
+  console.log('private route');
   return (
     <Route
       {...rest}
@@ -36,6 +36,7 @@ const PrivateRoute = ({ component: Component, ...rest }: any) => {
 };
 
 const Routes: React.FC = () => {
+  console.log('route');
   const existingTokens = localStorage.getItem('tokens');
   const [authTokens, setAuthTokens] = useState(existingTokens);
 
@@ -48,10 +49,10 @@ const Routes: React.FC = () => {
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
       <BrowserRouter>
         <Switch>
+          <Route component={Register} path="/register" />
           <Route component={Login} path="/" exact />
 
           <PrivateRoute component={Estoques} path="/estoques" exact />
-          <PrivateRoute component={Register} path="/register" exact />
           <PrivateRoute component={Desperdicios} path="/desperdicios" exact />
           <PrivateRoute component={Fornecedores} path="/fornecedores" exact />
           <PrivateRoute component={Funcionarios} path="/funcionarios" exact />

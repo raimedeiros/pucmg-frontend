@@ -6,12 +6,15 @@ import { Container, Row, Col } from 'react-grid-system';
 import { useAuth } from '../../context/auth.js';
 import api from '../../services/api';
 import './login.css';
+import Loader from '../../components/Loader';
 
 const Login: React.FC = () => {
+  console.log('login');
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+  const [loadStatus, setLoadStatus] = useState<boolean>(false);
 
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -26,7 +29,7 @@ const Login: React.FC = () => {
 
   async function handleSubmit(event: FormEvent): Promise<void> {
     event.preventDefault();
-
+    setLoadStatus(true);
     api
       .post('sessions', formData)
       .then(response => {
@@ -42,6 +45,7 @@ const Login: React.FC = () => {
         setIsError(true);
         setLoggedIn(false);
       });
+    setLoadStatus(false);
   }
 
   if (isLoggedIn) {
@@ -88,6 +92,7 @@ const Login: React.FC = () => {
                 </div>
               </label>
             </div>
+            {loadStatus && <Loader />}
 
             {isError && (
               <div className="info-login-error">

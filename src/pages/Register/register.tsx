@@ -3,22 +3,17 @@ import { useHistory } from 'react-router-dom';
 import { Container, Col, Row } from 'react-grid-system';
 
 import api from '../../services/api';
-import './login.css';
-
-interface TiposFuncionario {
-  id: number;
-  name: string;
-}
+import '../Login/login.css';
 
 const CreateFuncionario: React.FC = () => {
+  console.log('register');
+  const history = useHistory();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     type: 0,
   });
-
-  const history = useHistory();
 
   async function handleInputChange(
     event: ChangeEvent<HTMLInputElement>,
