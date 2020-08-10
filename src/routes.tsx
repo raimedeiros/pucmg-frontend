@@ -49,9 +49,9 @@ const Routes: React.FC = () => {
       <BrowserRouter>
         <Switch>
           <Route component={Login} path="/" exact />
+          <Route component={Register} path="/register" exact />
 
           <PrivateRoute component={Estoques} path="/estoques" exact />
-          <PrivateRoute component={Register} path="/register" exact />
           <PrivateRoute component={Desperdicios} path="/desperdicios" exact />
           <PrivateRoute component={Fornecedores} path="/fornecedores" exact />
           <PrivateRoute component={Funcionarios} path="/funcionarios" exact />
