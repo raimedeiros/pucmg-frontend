@@ -108,3 +108,11 @@ body{
 #page-login .loader-component p{
   display: none;
 }
+#page-login .login-facebook{
+  margin:10px;
+  text-align: center;
+}
+#page-login .login-facebook{
+  padding: 10px;
+  border-radius: 10px;
+}

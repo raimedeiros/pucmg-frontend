@@ -2,11 +2,18 @@ import React, { FormEvent, useState, ChangeEvent } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { FiLogIn, FiPlusCircle, FiUser, FiKey } from 'react-icons/fi';
 import { Container, Row, Col } from 'react-grid-system';
+import FacebookLogin from 'react-facebook-login';
 
 import { useAuth } from '../../context/auth.js';
 import api from '../../services/api';
 import './login.css';
 import Loader from '../../components/Loader';
+
+interface FacebookUser {
+  name: string;
+  email: string;
+  password: string;
+}
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +25,53 @@ const Login: React.FC = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [isError, setIsError] = useState(false);
   const { setAuthTokens } = useAuth();
+
+  const [facebookUser, setFacebookUser] = useState<FacebookUser>();
+  const responseFacebook = async (response: any): Promise<void> => {
+    try {
+      const password = response.accessToken;
+      setFacebookUser({
+        name: response.name,
+        email: response.email,
+        password: password.substr(1, 8),
+      });
+      console.log('response', facebookUser);
+      const dbUser = await api.get(
+        `funcionarios/?email=${facebookUser?.email}`,
+      );
+      if (dbUser.data) {
+        console.log('existe data');
+        setLoadStatus(true);
+        api
+          .post('sessionsFacebook', {
+            dbUser: dbUser.data,
+            accessToken: response.accessToken,
+          })
+          .then(credentials => {
+            console.log(credentials.status);
+            if (credentials.status === 200) {
+              console.log('credentials', credentials.data);
+              setAuthTokens(credentials.data);
+              setLoggedIn(true);
+            } else {
+              setIsError(true);
+              setLoggedIn(false);
+            }
+          })
+          .catch(e => {
+            setIsError(true);
+            setLoggedIn(false);
+          });
+        setLoadStatus(false);
+      }
+    } catch (error) {
+      console.log('erro');
+    }
+  };
+
+  /*   function loginFacebook(response: any): void {
+    console.log(response);
+  } */
 
   async function handleInputChange(
     event: ChangeEvent<HTMLInputElement>,
@@ -111,6 +165,15 @@ const Login: React.FC = () => {
               <FiPlusCircle />
               Criar novo usuário
             </Link>
+          </div>
+          <div className="login-facebook">
+            <FacebookLogin
+              appId="1546719762173713"
+              autoLoad
+              fields="name,email"
+              callback={responseFacebook}
+              textButton="Entrar com facebook"
+            />
           </div>
         </Col>
       </Row>
