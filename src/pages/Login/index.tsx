@@ -1,4 +1,4 @@
-import React, { FormEvent, useState, ChangeEvent } from 'react';
+import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { FiLogIn, FiPlusCircle, FiUser, FiKey } from 'react-icons/fi';
 import { Container, Row, Col } from 'react-grid-system';
@@ -13,6 +13,13 @@ interface FacebookUser {
   name: string;
   email: string;
   password: string;
+  accessToken: string;
+}
+interface DataBaseUser {
+  id: number;
+  name: string;
+  email: string;
+  type: string;
 }
 
 const Login: React.FC = () => {
@@ -26,52 +33,66 @@ const Login: React.FC = () => {
   const [isError, setIsError] = useState(false);
   const { setAuthTokens } = useAuth();
 
+  // Usuario do facebook
   const [facebookUser, setFacebookUser] = useState<FacebookUser>();
+
+  // Usuario do banco
+  const [databaseUser, setDataBaseUser] = useState<DataBaseUser>();
+
   const responseFacebook = async (response: any): Promise<void> => {
-    try {
-      const password = response.accessToken;
-      setFacebookUser({
-        name: response.name,
-        email: response.email,
-        password: password.substr(1, 8),
-      });
-      console.log('response', facebookUser);
-      const dbUser = await api.get(
-        `funcionarios/?email=${facebookUser?.email}`,
-      );
-      if (dbUser.data) {
-        console.log('existe data');
-        setLoadStatus(true);
-        api
-          .post('sessionsFacebook', {
-            dbUser: dbUser.data,
-            accessToken: response.accessToken,
-          })
-          .then(credentials => {
-            console.log(credentials.status);
-            if (credentials.status === 200) {
-              console.log('credentials', credentials.data);
-              setAuthTokens(credentials.data);
-              setLoggedIn(true);
-            } else {
-              setIsError(true);
-              setLoggedIn(false);
-            }
-          })
-          .catch(e => {
-            setIsError(true);
-            setLoggedIn(false);
-          });
-        setLoadStatus(false);
-      }
-    } catch (error) {
-      console.log('erro');
-    }
+    const password = response.accessToken;
+    setFacebookUser({
+      name: response.name,
+      email: response.email,
+      password: password.substr(1, 8),
+      accessToken: response.accessToken,
+    });
   };
 
-  /*   function loginFacebook(response: any): void {
-    console.log(response);
-  } */
+  useEffect(() => {
+    api
+      .post('sessionsFacebook', {
+        dbUser: databaseUser,
+        accessToken: facebookUser?.accessToken,
+      })
+      .then(credentials => {
+        if (credentials.status === 200) {
+          setAuthTokens(credentials.data);
+          setLoggedIn(true);
+        } else {
+          setIsError(true);
+          setLoggedIn(false);
+        }
+      })
+      .catch(e => {
+        setIsError(true);
+        setLoggedIn(false);
+      });
+    setLoadStatus(false);
+  }, [databaseUser]);
+
+  useEffect(() => {
+    if (facebookUser) {
+      api
+        .get(`funcionarios/?email=${facebookUser.email}`)
+        .then(dbUser => {
+          if (dbUser.data) {
+            setDataBaseUser(dbUser.data);
+          }
+        })
+        .catch(e => {
+          api
+            .post('funcionarios', {
+              name: facebookUser.name,
+              email: facebookUser.email,
+              password: facebookUser.password,
+            })
+            .then(funcionario => {
+              setDataBaseUser(funcionario.data);
+            });
+        });
+    }
+  }, [facebookUser]);
 
   async function handleInputChange(
     event: ChangeEvent<HTMLInputElement>,
