@@ -40,13 +40,15 @@ const Login: React.FC = () => {
   const [databaseUser, setDataBaseUser] = useState<DataBaseUser>();
 
   const responseFacebook = async (response: any): Promise<void> => {
-    const password = response.accessToken;
-    setFacebookUser({
-      name: response.name,
-      email: response.email,
-      password: password.substr(1, 8),
-      accessToken: response.accessToken,
-    });
+    if (response.accessToken) {
+      const password = response.accessToken;
+      setFacebookUser({
+        name: response.name,
+        email: response.email,
+        password: password.substr(1, 8),
+        accessToken: response.accessToken,
+      });
+    }
   };
 
   useEffect(() => {
@@ -190,7 +192,6 @@ const Login: React.FC = () => {
           <div className="login-facebook">
             <FacebookLogin
               appId="1546719762173713"
-              autoLoad
               fields="name,email"
               callback={responseFacebook}
               textButton="Entrar com facebook"
