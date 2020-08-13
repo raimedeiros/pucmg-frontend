@@ -52,25 +52,27 @@ const Login: React.FC = () => {
   };
 
   useEffect(() => {
-    api
-      .post('sessionsFacebook', {
-        dbUser: databaseUser,
-        accessToken: facebookUser?.accessToken,
-      })
-      .then(credentials => {
-        if (credentials.status === 200) {
-          setAuthTokens(credentials.data);
-          setLoggedIn(true);
-        } else {
+    if (databaseUser) {
+      api
+        .post('sessionsFacebook', {
+          dbUser: databaseUser,
+          accessToken: facebookUser?.accessToken,
+        })
+        .then(credentials => {
+          if (credentials.status === 200) {
+            setAuthTokens(credentials.data);
+            setLoggedIn(true);
+          } else {
+            setIsError(true);
+            setLoggedIn(false);
+          }
+        })
+        .catch(e => {
           setIsError(true);
           setLoggedIn(false);
-        }
-      })
-      .catch(e => {
-        setIsError(true);
-        setLoggedIn(false);
-      });
-    setLoadStatus(false);
+        });
+      setLoadStatus(false);
+    }
   }, [databaseUser]);
 
   useEffect(() => {
@@ -193,6 +195,7 @@ const Login: React.FC = () => {
             <FacebookLogin
               appId="1546719762173713"
               fields="name,email"
+              autoLoad={false}
               callback={responseFacebook}
               textButton="Entrar com facebook"
             />
