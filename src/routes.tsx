@@ -24,11 +24,12 @@ import RelatorioDesperdicios from './pages/Relatorios/relatorioDesperdicios';
 
 const PrivateRoute = ({ component: Component, ...rest }: any) => {
   const { authTokens } = useAuth();
+  const loginValido = !!(authTokens.user && authTokens.token);
   return (
     <Route
       {...rest}
       render={props =>
-        authTokens ? <Component {...props} /> : <Redirect to="/" />
+        loginValido ? <Component {...props} /> : <Redirect to="/" />
       }
     />
   );
