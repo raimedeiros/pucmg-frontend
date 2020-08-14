@@ -2,30 +2,19 @@ import React, { useState, FormEvent, ChangeEvent, useEffect } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { Container, Col, Row } from 'react-grid-system';
 import { FiBox } from 'react-icons/fi';
-import DatePicker, { registerLocale } from 'react-datepicker';
 
-import ptBR from 'date-fns/locale/pt-BR';
 import api from '../../services/api';
 import Menu from '../Menu';
 import 'react-datepicker/dist/react-datepicker.css';
 
-registerLocale('pt-BR', ptBR);
-
 interface EditProductsParams {
   produto: string;
-}
-interface Produto {
-  id: number;
-  name: string;
-  expires: Date;
-  amount: number;
 }
 interface EditProdutoDTO {
   amount: number;
 }
 const EditProduto: React.FC = () => {
   const { params } = useRouteMatch<EditProductsParams>();
-  const [produto, setProduto] = useState<Produto>();
   const [formData, setFormData] = useState<EditProdutoDTO>({
     amount: 0,
   });
@@ -33,7 +22,6 @@ const EditProduto: React.FC = () => {
 
   useEffect(() => {
     api.get(`produtos/${params.produto}`).then(response => {
-      setProduto(response.data.produtos);
       setFormData({ amount: response.data.produtos.amount.toString() });
     });
   }, [params.produto]);
@@ -78,7 +66,7 @@ const EditProduto: React.FC = () => {
                 <form className="form-padrao" onSubmit={handleSubmit}>
                   <div className="field">
                     <label htmlFor="amount">
-                      Quantidade
+                      Quantidade restante
                       <div className="input-box">
                         <input
                           value={formData?.amount}
