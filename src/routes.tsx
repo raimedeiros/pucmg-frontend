@@ -13,6 +13,7 @@ import Register from './pages/Register/register';
 import Estoques from './pages/Estoques';
 import CreateEstoque from './pages/Estoques/createEstoque';
 import CreateProduto from './pages/Produtos/createProduto';
+import EditProduto from './pages/Produtos/editProduto';
 import Desperdicios from './pages/Desperdicios/index';
 import CreateDesperdicios from './pages/Desperdicios/createDesperdicio';
 import CreateFornecedor from './pages/Fornecedores/createFornecedor';
@@ -59,6 +60,10 @@ const Routes: React.FC = () => {
           <PrivateRoute
             component={CreateProduto}
             path="/produtos/create/:estoque"
+          />
+          <PrivateRoute
+            component={EditProduto}
+            path="/produtos/edit/:produto"
           />
           <PrivateRoute
             component={CreateDesperdicios}
