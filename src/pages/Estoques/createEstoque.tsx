@@ -60,14 +60,16 @@ const CreateEstoque: React.FC = () => {
 
         <Col className="content-page" md={10}>
           <div className="main-padding">
-            <Row>
-              <Col className="titulo-pagina">
-                <h1>
-                  <FiBox />
-                  Adicionar estoque
-                </h1>
-              </Col>
-            </Row>
+            <header>
+              <Row>
+                <Col className="titulo-pagina">
+                  <h1>
+                    <FiBox />
+                    Adicionar estoque
+                  </h1>
+                </Col>
+              </Row>
+            </header>
             <Row>
               <Col>
                 <form className="form-padrao" onSubmit={handleSubmit}>

@@ -117,15 +117,16 @@ const RelatorioDesperdicios: React.FC = () => {
 
         <Col className="content-page" md={10}>
           <div className="main-padding">
-            <Row>
-              <Col className="titulo-pagina">
-                <h1>
-                  <FiBarChart2 />
-                  Relatório de desperdícios
-                </h1>
-              </Col>
-            </Row>
-
+            <header>
+              <Row>
+                <Col className="titulo-pagina">
+                  <h1>
+                    <FiBarChart2 />
+                    Relatório de desperdícios
+                  </h1>
+                </Col>
+              </Row>
+            </header>
             {loadStatus && <Loader />}
 
             {!loadStatus && (

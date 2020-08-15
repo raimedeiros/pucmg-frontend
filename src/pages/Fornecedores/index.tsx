@@ -39,22 +39,24 @@ const Fornecedores: React.FC = () => {
 
         <Col className="content-page" md={10}>
           <div className="main-padding">
-            <Row>
-              <Col className="titulo-pagina" sm={12} md={6}>
-                <h1>
-                  <FiShoppingBag />
-                  Fornecedores
-                </h1>
-              </Col>
-              <Col className="adicionar-item" sm={12} md={6}>
-                <Link to="/fornecedores/create">
-                  <button type="button" className="button-roxo">
-                    <FiPlusCircle />
-                    Adicionar fornecedor
-                  </button>
-                </Link>
-              </Col>
-            </Row>
+            <header>
+              <Row>
+                <Col className="titulo-pagina" sm={12} md={6}>
+                  <h1>
+                    <FiShoppingBag />
+                    Fornecedores
+                  </h1>
+                </Col>
+                <Col className="adicionar-item" sm={12} md={6}>
+                  <Link to="/fornecedores/create">
+                    <button type="button" className="button-roxo">
+                      <FiPlusCircle />
+                      Adicionar fornecedor
+                    </button>
+                  </Link>
+                </Col>
+              </Row>
+            </header>
             {loadStatus && <Loader />}
             {!loadStatus && (
               <>

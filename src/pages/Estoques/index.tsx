@@ -44,22 +44,24 @@ const Estoques: React.FC = () => {
 
         <Col className="content-page" md={10}>
           <div className="main-padding">
-            <Row>
-              <Col className="titulo-pagina" sm={12} md={6}>
-                <h1>
-                  <FiBox />
-                  Estoques
-                </h1>
-              </Col>
-              <Col className="adicionar-item" sm={12} md={6}>
-                <Link to="/estoques/create">
-                  <button type="button" className="button-roxo">
-                    <FiPlusCircle />
-                    Adicionar estoque
-                  </button>
-                </Link>
-              </Col>
-            </Row>
+            <header>
+              <Row>
+                <Col className="titulo-pagina" sm={12} md={6}>
+                  <h1>
+                    <FiBox />
+                    Estoques
+                  </h1>
+                </Col>
+                <Col className="adicionar-item" sm={12} md={6}>
+                  <Link to="/estoques/create">
+                    <button type="button" className="button-roxo">
+                      <FiPlusCircle />
+                      Adicionar estoque
+                    </button>
+                  </Link>
+                </Col>
+              </Row>
+            </header>
             {loadStatus && <Loader />}
             {!loadStatus && (
               <>
