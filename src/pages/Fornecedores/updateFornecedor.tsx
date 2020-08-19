@@ -6,42 +6,28 @@ import { FiBox } from 'react-icons/fi';
 import Menu from '../Menu';
 import api from '../../services/api';
 
-interface TiposFuncionario {
-  id: number;
-  name: string;
+interface UpdateFornecedorParams {
+  fornecedor: string;
 }
-interface UpdateFuncionarioParams {
-  funcionario: string;
-}
-const UpdateFuncionario: React.FC = () => {
-  const { params } = useRouteMatch<UpdateFuncionarioParams>();
+const UpdateFornecedor: React.FC = () => {
+  const { params } = useRouteMatch<UpdateFornecedorParams>();
 
-  const [tiposFuncionario, setTiposFuncionario] = useState<TiposFuncionario[]>(
-    [],
-  );
-  const [selectedTipoFuncionario, setSelectedTipoFuncionario] = useState('');
   const [formData, setFormData] = useState({
     name: '',
-    type: '',
-    email: '',
+    address: '',
+    phone: '',
   });
 
   useEffect(() => {
-    api.get(`/funcionarios/${params.funcionario}`).then(response => {
-      const funcionario = {
-        name: response.data.funcionario.name,
-        email: response.data.funcionario.email,
-        type: response.data.tipo_funcionario.tipo,
+    api.get(`/fornecedores/${params.fornecedor}`).then(response => {
+      const fornecedor = {
+        name: response.data.name,
+        address: response.data.address,
+        phone: response.data.phone,
       };
-      setFormData(funcionario);
+      setFormData(fornecedor);
     });
-  }, [params.funcionario]);
-
-  useEffect(() => {
-    api.get('/tipos-funcionarios').then(response => {
-      setTiposFuncionario(response.data);
-    });
-  }, []);
+  }, [params.fornecedor]);
 
   const history = useHistory();
 
@@ -54,20 +40,14 @@ const UpdateFuncionario: React.FC = () => {
 
   async function handleSubmit(event: FormEvent): Promise<void> {
     event.preventDefault();
-    const { name, email } = formData;
+    const { name, address, phone } = formData;
     const data = {
       name,
-      email,
-      type: selectedTipoFuncionario,
+      address,
+      phone,
     };
-    await api.post(`funcionarios/${params.funcionario}`, data);
-    history.push('/funcionarios');
-  }
-  async function handleSelectTipoFuncionario(
-    event: ChangeEvent<HTMLSelectElement>,
-  ): Promise<void> {
-    const tipoFuncionario = event.target.value;
-    setSelectedTipoFuncionario(tipoFuncionario);
+    await api.post(`fornecedores/${params.fornecedor}`, data);
+    history.push('/fornecedores');
   }
 
   return (
@@ -84,7 +64,7 @@ const UpdateFuncionario: React.FC = () => {
                 <Col className="titulo-pagina">
                   <h1>
                     <FiBox />
-                    Atualizar funcionário
+                    Atualizar fornecedor
                   </h1>
                 </Col>
               </Row>
@@ -107,41 +87,31 @@ const UpdateFuncionario: React.FC = () => {
                     </label>
                   </div>
                   <div className="field">
-                    <label htmlFor="email">
-                      Email
+                    <label htmlFor="address">
+                      Endereço
                       <div className="input-box">
                         <input
                           type="text"
-                          name="email"
-                          id="email"
-                          value={formData.email}
+                          name="address"
+                          id="address"
+                          value={formData.address}
                           onChange={handleInputChange}
                         />
                       </div>
                     </label>
                   </div>
                   <div className="field">
-                    <label htmlFor="type">
-                      Tipo
-                      <select
-                        name="type"
-                        id="type"
-                        value={formData.type}
-                        onChange={handleSelectTipoFuncionario}
-                      >
-                        <option value="0">
-                          Selecione um tipo de funcionário
-                          {formData.type}
-                        </option>
-                        {tiposFuncionario.map(tipoFuncionario => (
-                          <option
-                            key={tipoFuncionario.id}
-                            value={tipoFuncionario.id}
-                          >
-                            {tipoFuncionario.name}
-                          </option>
-                        ))}
-                      </select>
+                    <label htmlFor="phone">
+                      Telefone
+                      <div className="input-box">
+                        <input
+                          type="text"
+                          name="phone"
+                          id="phone"
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                        />
+                      </div>
                     </label>
                   </div>
                   <div className="submit-button">
@@ -159,4 +129,4 @@ const UpdateFuncionario: React.FC = () => {
   );
 };
 
-export default UpdateFuncionario;
+export default UpdateFornecedor;

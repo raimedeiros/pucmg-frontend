@@ -18,6 +18,8 @@ import Desperdicios from './pages/Desperdicios/index';
 import CreateDesperdicios from './pages/Desperdicios/createDesperdicio';
 import CreateFornecedor from './pages/Fornecedores/createFornecedor';
 import Fornecedores from './pages/Fornecedores';
+import DeleteFornecedores from './pages/Fornecedores/deleteFornecedor';
+import UpdateFornecedor from './pages/Fornecedores/updateFornecedor';
 import Funcionarios from './pages/Funcionarios';
 import UpdateFuncionario from './pages/Funcionarios/updateFuncionario';
 import DeleteFuncionario from './pages/Funcionarios/deleteFuncionario';
@@ -74,6 +76,14 @@ const Routes: React.FC = () => {
             component={CreateFornecedor}
             path="/fornecedores/create"
             exact
+          />
+          <PrivateRoute
+            component={DeleteFornecedores}
+            path="/fornecedores/delete/:fornecedor?"
+          />
+          <PrivateRoute
+            component={UpdateFornecedor}
+            path="/fornecedores/update/:fornecedor?"
           />
           <PrivateRoute
             component={UpdateFuncionario}

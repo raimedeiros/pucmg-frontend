@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Container } from 'react-grid-system';
-import { FiShoppingBag, FiPlusCircle } from 'react-icons/fi';
+import { FiShoppingBag, FiPlusCircle, FiEdit, FiDelete } from 'react-icons/fi';
 import ReactExport from 'react-export-excel';
 import api from '../../services/api';
 import Menu from '../Menu';
@@ -68,6 +68,7 @@ const Fornecedores: React.FC = () => {
                           <th className="cell-name">Fornecedor</th>
                           <th>Endereço</th>
                           <th>Telefone</th>
+                          <th>Ações</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -78,6 +79,14 @@ const Fornecedores: React.FC = () => {
                               {fornecedor.address}
                             </td>
                             <td className="cell-actions">{fornecedor.phone}</td>
+                            <td className="cell-actions">
+                              <Link to={`fornecedores/update/${fornecedor.id}`}>
+                                <FiEdit />
+                              </Link>
+                              <Link to={`fornecedores/delete/${fornecedor.id}`}>
+                                <FiDelete />
+                              </Link>
+                            </td>
                           </tr>
                         ))}
                       </tbody>
