@@ -24,6 +24,7 @@ import Funcionarios from './pages/Funcionarios';
 import UpdateFuncionario from './pages/Funcionarios/updateFuncionario';
 import DeleteFuncionario from './pages/Funcionarios/deleteFuncionario';
 import RelatorioDesperdicios from './pages/Relatorios/relatorioDesperdicios';
+import PermissaoNegada from './pages/PermissaoNegada';
 
 const PrivateRoute = ({ component: Component, ...rest }: any) => {
   const { authTokens } = useAuth();
@@ -33,6 +34,28 @@ const PrivateRoute = ({ component: Component, ...rest }: any) => {
       {...rest}
       render={props =>
         loginValido ? <Component {...props} /> : <Redirect to="/" />
+      }
+    />
+  );
+};
+
+const PrivateAdmRoute = ({ component: Component, ...rest }: any) => {
+  const { authTokens } = useAuth();
+  console.log(authTokens);
+  const loginValido = !!(
+    authTokens.user &&
+    authTokens.user.type === 2 &&
+    authTokens.token
+  );
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        loginValido ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/permissao-negada" />
+        )
       }
     />
   );
@@ -53,11 +76,16 @@ const Routes: React.FC = () => {
         <Switch>
           <Route component={Register} path="/register" />
           <Route component={Login} path="/" exact />
+          <Route component={PermissaoNegada} path="/permissao-negada" exact />
 
           <PrivateRoute component={Estoques} path="/estoques" exact />
           <PrivateRoute component={Desperdicios} path="/desperdicios" exact />
           <PrivateRoute component={Fornecedores} path="/fornecedores" exact />
-          <PrivateRoute component={Funcionarios} path="/funcionarios" exact />
+          <PrivateAdmRoute
+            component={Funcionarios}
+            path="/funcionarios"
+            exact
+          />
 
           <PrivateRoute component={CreateEstoque} path="/estoques/create" />
           <PrivateRoute
@@ -85,11 +113,11 @@ const Routes: React.FC = () => {
             component={UpdateFornecedor}
             path="/fornecedores/update/:fornecedor?"
           />
-          <PrivateRoute
+          <PrivateAdmRoute
             component={UpdateFuncionario}
             path="/funcionarios/update/:funcionario?"
           />
-          <PrivateRoute
+          <PrivateAdmRoute
             component={DeleteFuncionario}
             path="/funcionarios/delete/:funcionario?"
           />
