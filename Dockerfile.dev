@@ -1,0 +1,14 @@
+# Get node image from dockerhub
+FROM node:14
+
+# Set the work path
+WORKDIR "/app"
+
+# Dependencies
+COPY package.json ./
+RUN npm install
+
+COPY . .
+
+# Starts react
+CMD ["npm", "run", "start"]

@@ -41,7 +41,6 @@ const PrivateRoute = ({ component: Component, ...rest }: any) => {
 
 const PrivateAdmRoute = ({ component: Component, ...rest }: any) => {
   const { authTokens } = useAuth();
-  console.log(authTokens);
   const loginValido = !!(
     authTokens.user &&
     authTokens.user.type === 2 &&
